@@ -8,6 +8,11 @@ import imagehash
 import itertools
 import threading
 import math
+import resource
+
+# Set the memory limit to 80% of available RAM
+memory_limit = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 0.8)
+resource.setrlimit(resource.RLIMIT_AS, (memory_limit, memory_limit))
 
 # Function to compare images using imagehash
 def compare_images(image_path1, image_path2, agro):

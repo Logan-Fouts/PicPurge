@@ -8,17 +8,12 @@ import imagehash
 import itertools
 import threading
 import math
-import resource
-
-# Set the memory limit to 80% of available RAM
-memory_limit = int(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 0.8)
-resource.setrlimit(resource.RLIMIT_AS, (memory_limit, memory_limit))
 
 # Function to compare images using imagehash
-def compare_images(image_path1, image_path2, agro):
+def compare_images(image1_path, image2_path, agro):
     try:
-        hash1 = imagehash.dhash(Image.open(image_path1))
-        hash2 = imagehash.dhash(Image.open(image_path2))
+        hash1 = imagehash.dhash(Image.open(image1_path))
+        hash2 = imagehash.dhash(Image.open(image2_path))
         hamming_distance = hash1 - hash2
         result = hamming_distance <= agro
         with lock:
@@ -26,6 +21,13 @@ def compare_images(image_path1, image_path2, agro):
         return result
     except (IOError, OSError, ValueError) as e:
         return False
+
+def process_image_batch(image_paths, output_folder, agro, keep_non_media):
+    for i in range(len(image_paths)):
+        for j in range(i+1, len(image_paths)):
+            image1_path = image_paths[i]
+            image2_path = image_paths[j]
+            process_image_pair(image1_path, image2_path, output_folder, agro, keep_non_media)
 
 def process_image_pair(image1_path, image2_path, output_folder, agro, keep_non_media):
     _, file_extension = os.path.splitext(image1_path)
@@ -91,16 +93,17 @@ image_paths = []
 for root, dirs, files in os.walk(folder_path):
     image_paths.extend([os.path.join(root, file) for file in files])
 
-image_pairs = list(itertools.combinations(range(len(image_paths)), 2))
+batch_size = 500  # Number of images to process in each batch
+
+# Split image paths into batches
+image_batches = [image_paths[i:i+batch_size] for i in range(0, len(image_paths), batch_size)]
 
 #################################### Processing ####################################
-# Process image pairs using multithreading
+# Process image batches using multithreading
 with concurrent.futures.ThreadPoolExecutor() as executor:
     futures = []
-    for image_pair in image_pairs:
-        image1_path = image_paths[image_pair[0]]
-        image2_path = image_paths[image_pair[1]]
-        futures.append(executor.submit(process_image_pair, image1_path, image2_path, output_folder, agro_threshold, keep_non_media))
+    for image_batch in image_batches:
+        futures.append(executor.submit(process_image_batch, image_batch, output_folder, agro_threshold, keep_non_media))
 
     for future in concurrent.futures.as_completed(futures):
         future.result()

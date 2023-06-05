@@ -22,25 +22,27 @@ def compare_images(image_path1, image_path2, agro):
     except (IOError, OSError, ValueError) as e:
         return False
 
-def process_image_pair(image1_path, image2_path, output_folder, agro):
+def process_image_pair(image1_path, image2_path, output_folder, agro, keep_non_media):
     _, file_extension = os.path.splitext(image1_path)
 
     if image1_path == image2_path:
         return
     
     if file_extension.lower() not in image_extensions + video_extensions:
-        try:
-            os.remove(image1_path)
-        except FileNotFoundError:
-            pass
+        if not keep_non_media:
+            try:
+                os.remove(image1_path)
+            except FileNotFoundError:
+                pass
         return
 
     _, file_extension = os.path.splitext(image2_path)
     if file_extension.lower() not in image_extensions + video_extensions:
-        try:
-            os.remove(image2_path)
-        except FileNotFoundError:
-            pass
+        if not keep_non_media:
+            try:
+                os.remove(image2_path)
+            except FileNotFoundError:
+                pass
         return
 
     if not os.path.exists(image1_path) or not os.path.exists(image2_path):
@@ -57,9 +59,11 @@ def process_image_pair(image1_path, image2_path, output_folder, agro):
 parser = argparse.ArgumentParser(description='Compare and remove duplicate images.')
 parser.add_argument('folder', type=str, help='Path to the folder containing the images. (Traversal included)')
 parser.add_argument('--agro', type=int, default=5, help='Aggressiveness threshold for duplicate image comparison')
+parser.add_argument('--no-clean', action='store_true', help='Keep non-image/non-video files')
 args = parser.parse_args()
 folder_path = args.folder
 agro_threshold = args.agro
+keep_non_media = args.no_clean
 
 # Define supported image and video file extensions
 image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp']
@@ -91,7 +95,7 @@ with concurrent.futures.ThreadPoolExecutor() as executor:
     for image_pair in image_pairs:
         image1_path = image_paths[image_pair[0]]
         image2_path = image_paths[image_pair[1]]
-        futures.append(executor.submit(process_image_pair, image1_path, image2_path, output_folder, agro_threshold))
+        futures.append(executor.submit(process_image_pair, image1_path, image2_path, output_folder, agro_threshold, keep_non_media))
 
     for future in concurrent.futures.as_completed(futures):
         future.result()

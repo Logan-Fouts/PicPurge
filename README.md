@@ -8,7 +8,7 @@ This script compares images in a folder and its subfolders to identify and allop
 ## Installation:
 1. Clone the repository:
    ```shell
-   git clone https://github.com/yourusername/duplicate-image-remover.git
+   git clone https://github.com/Logan-Fouts/duplicate-image-remover.git
 1. Install the required Python packages:
    ```shell
    pip install Pillow tqdm imagehash

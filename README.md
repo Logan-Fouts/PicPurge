@@ -8,7 +8,7 @@ This script compares images in a folder and its subfolders to identify and allop
 ## Installation:
 1. Clone the repository:
    ```shell
-   git clone https://github.com/Logan-Fouts/duplicate-image-remover.git
+   git clone https://github.com/yourusername/duplicate-image-remover.git
 1. Install the required Python packages:
    ```shell
    pip install Pillow tqdm imagehash
@@ -18,9 +18,10 @@ This script compares images in a folder and its subfolders to identify and allop
    cd duplicate-image-remover
 1. Run the script with the desired folder path:
    ```shell
-   python duplicate_image_remover.py --agro 0 /path/to/folder
+   python duplicate_image_remover.py --agro 0 --no-clean /path/to/folder
 * **Note-** Replace "/path/to/folder" with the actual path to the folder containing the images. 
-* **Note-** Set the aggresivness of the removal 0 is not agressive and 10 is very aggresive.
+* **Argument 1-** Set the aggresivness '--agro' of the removal, 0 is not agressive and 10 is very aggresive.
+* **Argument 2-** Set the flag '--no-clean' to make the script not remove non-media files, otherwise it will remove them all.
 3. The script will compare the images and move the duplicate images to a separate folder named "Duplicate-Images" within the original folder.
 
 ## Supported File Types:

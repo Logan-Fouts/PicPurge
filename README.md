@@ -1,4 +1,5 @@
-# PicPurge
+<img src="./images/logo-no-background.png" alt="Alt text" width="300">  
+
 This script compares images in a folder and its subfolders to identify and allopw for easy removal of duplicates.
 
 ## Prerequisites:

@@ -9,8 +9,15 @@ import itertools
 import threading
 import math
 
+
+# Define supported image and video file extensions
+image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp']
+video_extensions = ['.mp4', '.avi', '.mkv', '.mov']
+
+lock = threading.Lock()
+
 # Function to compare images using imagehash
-def compare_images(image1_path, image2_path, agro):
+def compare_images(image1_path, image2_path, agro, pbar):
     try:
         hash1 = imagehash.dhash(Image.open(image1_path))
         hash2 = imagehash.dhash(Image.open(image2_path))
@@ -22,14 +29,14 @@ def compare_images(image1_path, image2_path, agro):
     except (IOError, OSError, ValueError) as e:
         return False
 
-def process_image_batch(image_paths, output_folder, agro, keep_non_media):
+def process_image_batch(image_paths, output_folder, agro, keep_non_media, pbar):
     for i in range(len(image_paths)):
         for j in range(i+1, len(image_paths)):
             image1_path = image_paths[i]
             image2_path = image_paths[j]
-            process_image_pair(image1_path, image2_path, output_folder, agro, keep_non_media)
+            process_image_pair(image1_path, image2_path, output_folder, agro, keep_non_media, pbar)
 
-def process_image_pair(image1_path, image2_path, output_folder, agro, keep_non_media):
+def process_image_pair(image1_path, image2_path, output_folder, agro, keep_non_media, pbar):
     _, file_extension = os.path.splitext(image1_path)
 
     if image1_path == image2_path:
@@ -55,57 +62,46 @@ def process_image_pair(image1_path, image2_path, output_folder, agro, keep_non_m
     if not os.path.exists(image1_path) or not os.path.exists(image2_path):
         return
 
-    if compare_images(image1_path, image2_path, agro):
+    if compare_images(image1_path, image2_path, agro, pbar):
         try:
             shutil.move(image2_path, os.path.join(output_folder, os.path.basename(image2_path)))
         except FileNotFoundError:
             pass
 
 #################################### Init ####################################
-# Parse command-line arguments
-parser = argparse.ArgumentParser(description='Compare and remove duplicate images.')
-parser.add_argument('folder', type=str, help='Path to the folder containing the images. (Traversal included)')
-parser.add_argument('--agro', type=int, default=5, help='Aggressiveness threshold for duplicate image comparison')
-parser.add_argument('--no-clean', action='store_true', help='Keep non-image/non-video files')
-args = parser.parse_args()
-folder_path = args.folder
-agro_threshold = args.agro
-keep_non_media = args.no_clean
+def init(folder_path, agro_threshold):
+    # TODO: keep_non_media argument implmentation
+    keep_non_media = True
 
-# Define supported image and video file extensions
-image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp']
-video_extensions = ['.mp4', '.avi', '.mkv', '.mov']
+    # Calculate the total number of comparisons needed
+    image_count = sum(len(files) for _, _, files in os.walk(folder_path))
+    total_comparisons = (image_count * (image_count - 1)) // 2
 
-# Calculate the total number of comparisons needed
-image_count = sum(len(files) for _, _, files in os.walk(folder_path))
-total_comparisons = (image_count * (image_count - 1)) // 2
+    # Initialize progress bar and lock for thread-safe updates
+    pbar = tqdm(total=total_comparisons, desc='Progress', unit='comparison')
 
-# Initialize progress bar and lock for thread-safe updates
-pbar = tqdm(total=total_comparisons, desc='Progress', unit='comparison')
-lock = threading.Lock()
+    # Create a separate folder for moving duplicate images
+    output_folder = os.path.join(folder_path, 'Duplicate-Images')
+    os.makedirs(output_folder, exist_ok=True)
 
-# Create a separate folder for moving duplicate images
-output_folder = os.path.join(folder_path, 'Duplicate-Images')
-os.makedirs(output_folder, exist_ok=True)
+    # Collect image paths
+    image_paths = []
+    for root, dirs, files in os.walk(folder_path):
+        image_paths.extend([os.path.join(root, file) for file in files])
 
-# Collect image paths
-image_paths = []
-for root, dirs, files in os.walk(folder_path):
-    image_paths.extend([os.path.join(root, file) for file in files])
+    batch_size = 500  # Number of images to process in each batch
 
-batch_size = 500  # Number of images to process in each batch
+    # Split image paths into batches
+    image_batches = [image_paths[i:i+batch_size] for i in range(0, len(image_paths), batch_size)]
 
-# Split image paths into batches
-image_batches = [image_paths[i:i+batch_size] for i in range(0, len(image_paths), batch_size)]
+    #################################### Processing ####################################
+    # Process image batches using multithreading
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        futures = []
+        for image_batch in image_batches:
+            futures.append(executor.submit(process_image_batch, image_batch, output_folder, agro_threshold, keep_non_media, pbar))
 
-#################################### Processing ####################################
-# Process image batches using multithreading
-with concurrent.futures.ThreadPoolExecutor() as executor:
-    futures = []
-    for image_batch in image_batches:
-        futures.append(executor.submit(process_image_batch, image_batch, output_folder, agro_threshold, keep_non_media))
+        for future in concurrent.futures.as_completed(futures):
+            future.result()
 
-    for future in concurrent.futures.as_completed(futures):
-        future.result()
-
-pbar.close()
+    pbar.close()

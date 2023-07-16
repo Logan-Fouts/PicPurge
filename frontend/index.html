@@ -37,7 +37,7 @@
       const keepNonMedia = document.querySelector('input[name="keep_non_media"]:checked').value;
 
       // Construct the API URL
-      const apiUrl = `http://localhost:5000/picAPI/run/${encodeURIComponent(folderPath)}/${aggressiveness}/${keepNonMedia}`;
+      const apiUrl = `http://localhost:5002/picAPI/run/${encodeURIComponent(folderPath)}/${aggressiveness}/${keepNonMedia}`;
 
       // Send POST request using AJAX
       fetch(apiUrl, {

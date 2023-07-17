@@ -1,13 +1,14 @@
-import { useState } from 'react'
-import './App.css'
-import Testpage from './components/TempPage'
+import "./App.css";
+import Banner from "./components/Banner.tsx";
+import Options from "./components/Options.tsx";
 
 function App() {
-
   return (
-        <><Testpage /></>
-  )
-  
+    <>
+      <Banner />
+      <Options />
+    </>
+  );
 }
 
-export default App
+export default App;

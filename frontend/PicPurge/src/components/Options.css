@@ -1,0 +1,66 @@
+.Options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5%;
+}
+
+.OptionList {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.OptionItem {
+  list-style-type: none;
+  padding: 2%;
+  font-size: 5vh;
+}
+
+.FolderSelect {
+  height: 5vh;
+  width: 8vw;
+  float: right;
+  font-size: 50%;
+  background-color: #75c5e7;
+  border: 0px;
+  border-radius: 7.5px;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.Agro {
+  height: 5vh;
+  width: 5vh;
+  background-color: #75c5e7;
+  font-size: 50%;
+  float: right;
+  color: white;
+  border: 0px;
+  border-radius: 7.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.Checkbox {
+  height: 2.5vh;
+  width: 2.5vh;
+  background-color: #75c5e7;
+  float: right;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.Process {
+  width: 10vw;
+  min-width: 70px;
+  height: 5vh;
+  min-height: 30px;
+  align-self: center;
+  border-radius: 7.5px;
+  border: 0px;
+  background-color: #75c5e7;
+  font-size: large;
+  font-weight: bolder;
+  color: white;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}

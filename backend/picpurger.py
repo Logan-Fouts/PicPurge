@@ -85,7 +85,7 @@ def init(folder_path, agro_threshold, keep_non_media):
     total_comparisons = (image_count * (image_count - 1)) // 2
 
     # Initialize progress bar and lock for thread-safe updates
-    pbar = tqdm(total=total_comparisons, desc="Progress", unit="comparison")
+    pbar = tqdm(total=total_comparisons, desc="Progress", unit="comparisons")
 
     # Create a separate folder for moving duplicate images
     output_folder = os.path.join(folder_path, "Duplicate-Images")

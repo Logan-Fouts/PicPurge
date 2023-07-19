@@ -18,15 +18,13 @@
 }
 
 .FolderSelect {
-  height: 5vh;
-  width: 8vw;
   float: right;
-  font-size: 50%;
-  background-color: #75c5e7;
-  border: 0px;
+  padding: 10px;
+  height: 1vw;
+  width: 15vw;
+  margin-top: 2%;
+  font-size: large;
   border-radius: 7.5px;
-  color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .Agro {

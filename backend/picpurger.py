@@ -80,9 +80,13 @@ def process_image_pair(
 
 #################################### Init ####################################
 def init(folder_path, agro_threshold, keep_non_media):
+    # Collect image paths
+    image_paths = []
+    for root, dirs, files in os.walk(folder_path):
+        image_paths.extend([os.path.join(root, file) for file in files])
+
     # Calculate the total number of comparisons needed
-    image_count = sum(len(files) for _, _, files in os.walk(folder_path))
-    total_comparisons = (image_count * (image_count - 1)) // 2
+    total_comparisons = (len(image_paths) * (len(image_paths) - 1)) // 2
 
     # Initialize progress bar and lock for thread-safe updates
     pbar = tqdm(total=total_comparisons, desc="Progress", unit="comparisons")
@@ -90,11 +94,6 @@ def init(folder_path, agro_threshold, keep_non_media):
     # Create a separate folder for moving duplicate images
     output_folder = os.path.join(folder_path, "Duplicate-Images")
     os.makedirs(output_folder, exist_ok=True)
-
-    # Collect image paths
-    image_paths = []
-    for root, dirs, files in os.walk(folder_path):
-        image_paths.extend([os.path.join(root, file) for file in files])
 
     batch_size = 500  # Number of images to process in each batch
 
@@ -123,3 +122,15 @@ def init(folder_path, agro_threshold, keep_non_media):
             future.result()
 
     pbar.close()
+
+    # Return the tqdm progress bar object
+    return pbar
+
+
+# Function to get the progress percentage from the tqdm progress bar
+def get_progress_update(pbar):
+    if pbar is not None:
+        progress_percentage = (pbar.n / pbar.total) * 100
+        return progress_percentage
+    else:
+        return 0  # Return 0 if pbar is not initialized

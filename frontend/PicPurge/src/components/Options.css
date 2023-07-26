@@ -22,7 +22,7 @@
   padding: 10px;
   height: 1vw;
   width: 15vw;
-  margin-top: 2%;
+  margin-top: 1%;
   font-size: large;
   border-radius: 7.5px;
 }
@@ -37,6 +37,7 @@
   border: 0px;
   border-radius: 7.5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 
 .Checkbox {
@@ -45,6 +46,7 @@
   background-color: #75c5e7;
   float: right;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 
 .Process {
@@ -61,4 +63,5 @@
   color: white;
   margin-top: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }

@@ -5,6 +5,7 @@ function Options() {
   const [folderPath, setFolderPath] = useState("");
   const [aggressiveness, setAggressiveness] = useState("1");
   const [removeNonMedia, setRemoveNonMedia] = useState(false);
+  const [agroMenu, toggleAgroMenu] = useState("2");
 
   const handleFolderPathChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setFolderPath(event.target.value);
@@ -17,6 +18,9 @@ function Options() {
   const handleRemoveNonMediaChange = (event: { target: { checked: boolean | ((prevState: boolean) => boolean); }; }) => {
     setRemoveNonMedia(event.target.checked);
   };
+  const handleAggressionClick = () => {
+    toggleAgroMenu(2);
+  }
 
   const handleProcessClick = () => {
     // Prepare the URL with the query parameters
@@ -34,8 +38,8 @@ function Options() {
           Enter Folder Path To Purge
           <input type="text" className="FolderSelect" value={folderPath} onChange={handleFolderPathChange} />
         </li>
-        <li className="OptionItem">
-          Set Aggressiveness
+        <button className="Agression" onClick={handleAggressionClick}>
+          Set Agressiveness
           <select className="Agro" value={aggressiveness} onChange={handleAggressivenessChange}>
             <option value="1">1</option>
             <option value="2">2</option>
@@ -43,7 +47,7 @@ function Options() {
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-        </li>
+        </button>
         <li className="OptionItem">
           Remove Non-Media
           <input type="checkbox" className="Checkbox" checked={removeNonMedia} onChange={handleRemoveNonMediaChange} />

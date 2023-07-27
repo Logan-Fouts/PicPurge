@@ -1,35 +1,24 @@
 :root {
-    background: radial-gradient(circle at 50% 50%, #FCEFEF 0%, #f9e0f9 100%);
+    --clr-dark: #0f172a;
+    --clr-light: #FCEFEF;
+    --clr-accent: #e11d48;
 }
 
 body {
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+    word-spacing: 1.4px;
+    color: var(--clr-dark);
+    /* radial-gradient(circle at 50% 50%, #FCEFEF 0%, #f9e0f9 100%) */
+    background: #FCEFEF;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: first baseline; 
+    height: 100vh;
 }
 
 .scale-up-center {
 	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-
-@-webkit-keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-            transform: scale(0.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-}
-
-@keyframes scale-up-center {
-  0% {
-    -webkit-transform: scale(0.5);
-            transform: scale(0.5);
-  }
-  100% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
 }

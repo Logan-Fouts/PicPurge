@@ -7,7 +7,11 @@
 
 .OptionList {
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
+  align-items:baseline;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 2em;
   width: 70%;
 }
 
@@ -28,6 +32,7 @@
 }
 
 .Agro {
+  visibility: hidden;
   height: 5vh;
   width: 5vh;
   background-color: #75c5e7;
@@ -50,18 +55,55 @@
 }
 
 .Process {
+  align-self: end;
   width: 10vw;
   min-width: 70px;
   height: 5vh;
   min-height: 30px;
-  align-self: center;
-  border-radius: 7.5px;
-  border: 0px;
+  align-self:auto;
   background-color: #75c5e7;
-  font-size: large;
-  font-weight: bolder;
-  color: white;
   margin-top: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  cursor: pointer;
+  cursor: pointer; 
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0.5em 1em;
+  border-radius: 7.5px;
+  border: 0px;
+  color: white;
+  transition: transform 0.3s, background-color 0.3s;
 }
+
+
+
+.Agression {
+  align-self: center;
+  width: 14vw;
+  min-width: 70px;
+  height: 5vh;
+  min-height: 30px;
+  align-self:auto;
+  background-color: #75c5e7;
+  margin-top: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer; 
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 0.5em 1em;
+  border-radius: 7.5px;
+  border: 0px;
+  color: white;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.Agression:hover {
+  transform: translateY(-5px);
+  background-color: blue;
+}
+
+.Process:hover {
+  transform: translateY(-5px);
+  background-color: blue;
+}
+
+

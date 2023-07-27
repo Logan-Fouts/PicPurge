@@ -83,7 +83,12 @@ def init(folder_path, agro_threshold, keep_non_media):
     # Collect image paths
     image_paths = []
     for root, dirs, files in os.walk(folder_path):
+        # Ignore the folder named "Duplicate-Images"
+        if "Duplicate-Images" in dirs:
+            dirs.remove("Duplicate-Images")
+
         image_paths.extend([os.path.join(root, file) for file in files])
+
 
     # Calculate the total number of comparisons needed
     total_comparisons = (len(image_paths) * (len(image_paths) - 1)) // 2

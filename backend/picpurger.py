@@ -14,18 +14,25 @@ from tqdm import tqdm
 image_extensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp"]
 video_extensions = [".mp4", ".avi", ".mkv", ".mov"]
 
+num_images = -1
+
 lock = threading.Lock()
 
-
+#################################### Logic ####################################
 # Function to compare images using imagehash
 def compare_images(image1_path, image2_path, agro, pbar):
+    global num_images
     try:
         hash1 = imagehash.dhash(Image.open(image1_path))
         hash2 = imagehash.dhash(Image.open(image2_path))
         hamming_distance = hash1 - hash2
         result = hamming_distance <= agro
         with lock:
-            pbar.update(1)  # Update progress bar in a thread-safe manner
+            if result:
+                num_images -= 1
+                pbar.update(num_images)
+            else:
+                pbar.update(1)
         return result
     except (IOError, OSError, ValueError) as e:
         return False
@@ -78,8 +85,10 @@ def process_image_pair(
             pass
 
 
-#################################### Init ####################################
+#################################### Initiation ####################################
 def init(folder_path, agro_threshold, keep_non_media):
+    global num_images
+
     # Collect image paths
     image_paths = []
     for root, dirs, files in os.walk(folder_path):
@@ -89,6 +98,7 @@ def init(folder_path, agro_threshold, keep_non_media):
 
         image_paths.extend([os.path.join(root, file) for file in files])
 
+    num_images = len(image_paths)
 
     # Calculate the total number of comparisons needed
     total_comparisons = (len(image_paths) * (len(image_paths) - 1)) // 2
@@ -107,7 +117,7 @@ def init(folder_path, agro_threshold, keep_non_media):
         image_paths[i : i + batch_size] for i in range(0, len(image_paths), batch_size)
     ]
 
-    #################################### Processing ####################################
+######### Begin Processing #########
     # Process image batches using multithreading
     with concurrent.futures.ThreadPoolExecutor() as executor:
         futures = []
@@ -128,14 +138,13 @@ def init(folder_path, agro_threshold, keep_non_media):
 
     pbar.close()
 
-    # Return the tqdm progress bar object
     return pbar
 
 
 # Function to get the progress percentage from the tqdm progress bar
 def get_progress_update(pbar):
-    if pbar is not None:
+    if pbar is not None and pbar.total != 0: # Dont divide by 0
         progress_percentage = (pbar.n / pbar.total) * 100
         return progress_percentage
     else:
-        return 0  # Return 0 if pbar is not initialized
+        return 0

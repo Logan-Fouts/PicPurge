@@ -1,24 +1,89 @@
 .Options {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding-right: 5%;
+  align-items: space-evenly;
+  padding: 1em;
+  outline: 2px solid black;
 }
 
 .OptionList {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
+  padding: 1em;
+  font-size: 16px;
+  outline: 2px solid black;
 }
+
+.SelectFolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 2.5rem;
+  padding: 0.75em;
+  outline: 2px solid black;
+}
+
+.DetectionLevel {
+  display: flex;
+  height: 40vh;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1em;
+  outline: 2px solid black;
+}
+.DetectionLevelText {
+  display: flex;
+  height: 10vh;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-between;
+  outline: 2px solid black;
+}
+.DetecitonLevelMainText {
+  display: flex;
+  font-size: 4em;
+  outline: 2px solid black;
+}
+.DetectionLevelSubText {
+  display: flex;
+  font-size: 2em;
+  outline: 2px solid black;
+}
+
+.DuplicateRemoval {
+  display: flex;
+  height: 12vh;
+  font-size: 2.5rem;
+  padding: 0.5em;
+  outline: 2px solid black;
+}
+
+.DuplicateRemovalSub {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  padding: 0.5em;
+  font-size: 1.7rem;
+
+}
+
 
 .OptionItem {
   list-style-type: none;
-  padding: 2%;
+  padding: 0.50em;
   font-size: 5vh;
+  outline: 2px solid black;
 }
 
+
+
+
 .FolderSelect {
-  float: right;
   padding: 10px;
   height: 1vw;
   width: 15vw;
@@ -44,17 +109,14 @@
   height: 2.5vh;
   width: 2.5vh;
   background-color: #75c5e7;
-  float: right;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
 
 .Process {
-  width: 10vw;
-  min-width: 70px;
+  width: 10em;
   height: 5vh;
   min-height: 30px;
-  align-self: center;
   border-radius: 7.5px;
   border: 0px;
   background-color: #75c5e7;

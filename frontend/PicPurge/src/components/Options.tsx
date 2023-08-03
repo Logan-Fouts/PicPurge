@@ -38,8 +38,8 @@ function Options() {
   return (
     <div className="Options">
       <ul className="OptionList">
-        <li className="OptionItem">
-          Enter Folder Path To Purge
+        <li className="SelectFolder">
+          Select Folder
           <input
             type="text"
             className="FolderSelect"
@@ -47,8 +47,15 @@ function Options() {
             onChange={handleFolderPathChange}
           />
         </li>
-        <li className="OptionItem">
-          Set Aggressiveness
+        <li className="DetectionLevel">
+          <li className="DetectionLevelText">
+            <li className="DetectionLevelMainText">
+              Detection Level
+            </li>
+            <li className="DetectonLevelSubText">
+              blah blah blah description
+            </li>
+          </li>
           <select
             className="Agro"
             value={aggressiveness}
@@ -61,18 +68,23 @@ function Options() {
             <option value="5">5</option>
           </select>
         </li>
-        <li className="OptionItem">
-          Remove Non-Media
-          <input
-            type="checkbox"
-            className="Checkbox"
-            checked={removeNonMedia}
-            onChange={handleRemoveNonMediaChange}
-          />
+        <li className="DuplicateRemoval">
+          <li className="DuplicateRemovalSub">
+            Remove Duplicates
+            <button className="Process" onClick={handleProcessClick}>
+            Process
+            </button>
+            Remove Non-Media
+            <input
+              type="checkbox"
+              className="Checkbox"
+              checked={removeNonMedia}
+              onChange={handleRemoveNonMediaChange}
+            />
+          </li>
+          
         </li>
-        <button className="Process" onClick={handleProcessClick}>
-          Process
-        </button>
+        
       </ul>
     </div>
   );

@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   align-items: space-evenly;
-  padding: 1em;
 }
 .OptionList {
   display: flex;
@@ -83,6 +82,8 @@
   display: flex;
   flex-direction: row;
   width: 100%;
+  font-size: .65em;
+  font-weight: 475;
   align-items: center;
   justify-content: space-between;
   
@@ -106,13 +107,16 @@
   border-radius: 7.5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  
 }
 .Checkbox {
   height: 2.5vh;
   width: 2.5vh;
+  margin-right: 6.1em;
   background-color: #75c5e7;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  
 }
 .Process {
   width: 9em;
@@ -128,4 +132,14 @@
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.Process:hover {
+  transform: translateY(-2px);
+  background-color: blue;
+}
+.Agro:hover {
+  transform: translateY(-2px);
+  background-color: blue;
 }

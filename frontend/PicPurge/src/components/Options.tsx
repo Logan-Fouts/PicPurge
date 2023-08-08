@@ -25,7 +25,22 @@ function Options() {
     setRemoveNonMedia(event.target.checked);
   };
 
-  const handleProcessClick = () => {
+  const handleProcessClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const button = event.currentTarget;
+    const ripple = document.createElement('span');
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
+    ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
+
+    ripple.classList.add('ripple');
+    button.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.remove();
+    }, 600);
     // Prepare the URL with the query parameters
     const url = `http://localhost:5002/picAPI/run/${encodeURIComponent(
       folderPath
@@ -35,6 +50,7 @@ function Options() {
     fetch(url);
     // TODO: Handle Response and Errors
   };
+  
   return (
     <div className="Options">
       <ul className="OptionList">

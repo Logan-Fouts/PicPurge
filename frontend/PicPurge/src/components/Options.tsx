@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Options.css";
 
+
 function Options() {
   const [folderPath, setFolderPath] = useState("");
   const [aggressiveness, setAggressiveness] = useState("1");
@@ -34,7 +35,6 @@ function Options() {
     fetch(url);
     // TODO: Handle Response and Errors
   };
-
   return (
     <div className="Options">
       <ul className="OptionList">
@@ -47,44 +47,42 @@ function Options() {
             onChange={handleFolderPathChange}
           />
         </li>
-        <li className="DetectionLevel">
-          <li className="DetectionLevelText">
-            <li className="DetectionLevelMainText">
-              Detection Level
-            </li>
-            <li className="DetectonLevelSubText">
-              blah blah blah description
-            </li>
-          </li>
-          <select
-            className="Agro"
-            value={aggressiveness}
-            onChange={handleAggressivenessChange}
-          >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </li>
-        <li className="DuplicateRemoval">
-          <li className="DuplicateRemovalSub">
+        <ul className="DetectionLevel">
+          <ul className="DetectionLevelText">
+            <li className="DetectionLevelMainText">Detection Level</li>
+            <li className="DetectionLevelSubText">Adjust the photo similarity threshold on the wheel to determine when photos should be treated as duplicates.</li>
+          </ul>
+          <ul className="DetectionWheelSection">
+            <select
+              className="Agro"
+              value={aggressiveness}
+              onChange={handleAggressivenessChange}
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </ul>
+        </ul>
+        <ul className="DuplicateRemoval">
+          <ul className="DuplicateRemovalSub">
             Remove Duplicates
             <button className="Process" onClick={handleProcessClick}>
             Process
             </button>
-            Remove Non-Media
-            <input
-              type="checkbox"
-              className="Checkbox"
-              checked={removeNonMedia}
-              onChange={handleRemoveNonMediaChange}
-            />
-          </li>
-          
-        </li>
-        
+            <li className="DuplicateRemovalCheckBox">
+              Remove Non-Media
+              <input
+                type="checkbox"
+                className="Checkbox"
+                checked={removeNonMedia}
+                onChange={handleRemoveNonMediaChange}
+              />
+            </li>
+          </ul>
+        </ul>
       </ul>
     </div>
   );

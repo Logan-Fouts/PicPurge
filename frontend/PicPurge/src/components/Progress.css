@@ -1,0 +1,36 @@
+
+.ProgressContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5vh; /* Adjust as needed */
+  }
+
+.ProgressRoot {
+  position: relative;
+  overflow: hidden;
+  background: solid black;
+  border-radius: 99999px;
+  width: 300px;
+  height: 25px;
+  border: .15em solid black;
+  /* Fix overflow clipping in Safari */
+  /* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
+  transform: translateZ(0);
+}
+
+.ProgressIndicator {
+  background-color: rgb(0, 255, 0);
+  width: 100%;
+  height: 100%;
+  transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.ProgressRoot::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #d3e9d3; /* Background color behind the progress bar */
+}

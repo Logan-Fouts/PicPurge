@@ -5,10 +5,13 @@ import math
 import os
 import shutil
 import threading
+import time
 
 import imagehash
 from PIL import Image
 from tqdm import tqdm
+from flask import Flask, request, jsonify #Commuication with the Frontend for Pbar
+
 
 # Define supported image and video file extensions
 image_extensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp"]

@@ -138,6 +138,15 @@ Before you begin, make sure you have the following prerequisites installed on yo
         ```bash
         npm install electron -g
         ```
+- radix-ui
+
+    2. Install the radix-ui packages by running the following commands:
+
+        ```terminal
+        npm install @radix-ui/react-switch
+        npm install @radix-ui/react-progress
+        ```
+
 # Starting The Development Enviroment
 ### Start The API
 1. Change into the PicPurge/backend directory

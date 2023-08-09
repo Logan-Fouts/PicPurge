@@ -1,88 +1,93 @@
 .Options {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
   align-items: space-evenly;
-  padding: 1em;
-  outline: 2px solid black;
 }
-
 .OptionList {
   display: flex;
   flex-direction: column;
   width: 50%;
   padding: 1em;
   font-size: 16px;
-  outline: 2px solid black;
 }
-
 .SelectFolder {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  font-weight: 450;
   font-size: 2.5rem;
   padding: 0.75em;
   outline: 2px solid black;
 }
-
 .DetectionLevel {
   display: flex;
   height: 40vh;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 1em;
   outline: 2px solid black;
 }
 .DetectionLevelText {
   display: flex;
   height: 10vh;
-  flex-direction: column;
-  align-items: left;
-  justify-content: space-between;
-  outline: 2px solid black;
-}
-.DetecitonLevelMainText {
-  display: flex;
-  font-size: 4em;
-  outline: 2px solid black;
-}
-.DetectionLevelSubText {
-  display: flex;
-  font-size: 2em;
-  outline: 2px solid black;
-}
-
-.DuplicateRemoval {
-  display: flex;
-  height: 12vh;
-  font-size: 2.5rem;
-  padding: 0.5em;
-  outline: 2px solid black;
-}
-
-.DuplicateRemovalSub {
-  display: flex;
-  justify-content: space-around;
+  width: 40%;
   flex-direction: column;
   align-items: left;
   justify-content: left;
-  padding: 0.5em;
-  font-size: 1.7rem;
-
 }
-
-
-.OptionItem {
-  list-style-type: none;
-  padding: 0.50em;
-  font-size: 5vh;
+.DetectionLevelMainText {
+  display: flex;
+  align-items: left;
+  font-size: 2.5em;
+  font-weight: 400;
+}
+.DetectionLevelSubText {
+  display: flex;
+  padding-left: 0.25em;
+  align-items: left;
+  font-size: 1em;
+}
+.DetectionWheelSection {
+  display: flex;
+  width: 45%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  justify-self: right;
+  flex-direction: column;
   outline: 2px solid black;
 }
-
-
-
-
+.DuplicateRemoval {
+  display: flex;
+  height: 16vh;
+  font-size: 1.8em;
+  font-weight: 400;
+  outline: 2px solid black;
+}
+.DuplicateRemovalSub {
+  display: flex;
+  padding-top: 0.3em;
+  flex-direction: column;
+  padding-left: 0.3em;
+  justify-content: space-evenly;
+  width: 36%;
+  align-items: left;
+  justify-content: left;
+  
+}
+.DuplicateRemovalCheckBox {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: .65em;
+  font-weight: 475;
+  align-items: center;
+  justify-content: space-between;
+  
+}
 .FolderSelect {
   padding: 10px;
   height: 1vw;
@@ -91,31 +96,34 @@
   font-size: large;
   border-radius: 7.5px;
 }
-
 .Agro {
   height: 5vh;
   width: 5vh;
+  margin-right: 1em;
   background-color: #75c5e7;
-  font-size: 50%;
-  float: right;
+  font-size: 1em;
   color: white;
   border: 0px;
   border-radius: 7.5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  
 }
-
 .Checkbox {
   height: 2.5vh;
   width: 2.5vh;
+  margin-right: 6.1em;
   background-color: #75c5e7;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  
 }
-
 .Process {
-  width: 10em;
-  height: 5vh;
+  width: 9em;
+  overflow: hidden;
+  height: 4vh;
+  margin-top: 0.7em;
+  margin-bottom: 0.35em;
   min-height: 30px;
   border-radius: 7.5px;
   border: 0px;
@@ -123,7 +131,32 @@
   font-size: large;
   font-weight: bolder;
   color: white;
-  margin-top: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+.Process span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  background-color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.Process:hover {
+  transform: translateY(-2px);
+  background-color: blue;
+}
+.Agro:hover {
+  transform: translateY(-2px);
+  background-color: blue;
 }

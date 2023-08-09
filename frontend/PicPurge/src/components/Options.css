@@ -2,13 +2,13 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
-  align-items: space-evenly;
+  align-content: center;
 }
 .OptionList {
   display: flex;
   flex-direction: column;
+  align-content: center;
   width: 50%;
-  padding: 1em;
   font-size: 16px;
 }
 .SelectFolder {
@@ -33,13 +33,16 @@
 .DetectionLevelText {
   display: flex;
   height: 10vh;
-  width: 40%;
+  width: 50%;
+  height: 100%;
   flex-direction: column;
   align-items: left;
-  justify-content: left;
+  justify-content: center;
+  
 }
 .DetectionLevelMainText {
   display: flex;
+  position: relative;
   align-items: left;
   font-size: 2.5em;
   font-weight: 400;
@@ -52,13 +55,10 @@
 }
 .DetectionWheelSection {
   display: flex;
-  width: 45%;
+  width: 50%;
   height: 100%;
-  align-items: center;
-  justify-content: center;
-  justify-self: right;
-  flex-direction: column;
-  outline: 2px solid black;
+  justify-content: center; /* Align content to the left */
+  align-items: center; /* Center vertically */
 }
 .DuplicateRemoval {
   display: flex;
@@ -86,7 +86,6 @@
   font-weight: 475;
   align-items: center;
   justify-content: space-between;
-  
 }
 .FolderSelect {
   padding: 10px;

@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as Progress from '@radix-ui/react-progress';
 import './Progress.css';
 
-const ProgressDemo: React.FC = () => {
-  const [progress, setProgress] = useState<number>(13);
+interface ProgressBarProps {
+  progress: number; // Receive the progress value as a prop
+}
 
-  useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
+const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
   return (
     <div className="ProgressContainer">
       <Progress.Root className="ProgressRoot" value={progress}>
@@ -22,4 +19,4 @@ const ProgressDemo: React.FC = () => {
   );
 };
 
-export default ProgressDemo;
+export default ProgressBar;

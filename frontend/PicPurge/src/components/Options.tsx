@@ -1,12 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Options.css";
-import Octagon from './Octagon';
-
+import Octagon from "./Octagon";
+import ProgressBar from "./Progress";
 
 function Options() {
+  let oldProgress = 0
   const [folderPath, setFolderPath] = useState("");
   const [aggressiveness, setAggressiveness] = useState("1");
   const [removeNonMedia, setRemoveNonMedia] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [buttonClicked, setButtonClicked] = useState(false);
+  let progressInterval: ReturnType<typeof setInterval> | undefined;
+
+  useEffect(() => {
+    if (buttonClicked) {
+      progressInterval = setInterval(() => {
+        fetchProgress();
+      }, 200);
+    }
+
+    return () => {
+      if (progressInterval) {
+        clearInterval(progressInterval);
+      }
+    };
+  }, [buttonClicked]);
+
+  const fetchProgress = async () => {
+    try {
+      const response = await fetch("http://localhost:5002/picAPI/get_progress");
+      if (response.ok) {
+        const data = await response.json();
+        const newProgress = data.progress;
+
+        if (Number(newProgress) !== Number(oldProgress)) {
+          setProgress(newProgress);
+          oldProgress = newProgress;
+        } else {
+          clearInterval(progressInterval);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching progress:", error);
+    }
+  };
 
   const handleFolderPathChange = (event: {
     target: { value: React.SetStateAction<string> };
@@ -26,35 +63,24 @@ function Options() {
     setRemoveNonMedia(event.target.checked);
   };
 
-  const handleProcessClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const button = event.currentTarget;
-    const ripple = document.createElement('span');
-    const rect = button.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
+  const handleProcessClick = async () => {
+    setButtonClicked(true); // Mark the button as clicked
 
-    ripple.style.width = ripple.style.height = `${size}px`;
-    ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
-    ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
-
-    ripple.classList.add('ripple');
-    button.appendChild(ripple);
-
-    setTimeout(() => {
-      ripple.remove();
-    }, 600);
-    // Prepare the URL with the query parameters
     const url = `http://localhost:5002/picAPI/run/${encodeURIComponent(
       folderPath
     )}/${aggressiveness}/${removeNonMedia}`;
 
-    // Make the GET request
-    fetch(url);
-    // TODO: Handle Response and Errors
+    try {
+      const response = await fetch(url);
+      if (response.ok) {
+        console.log("Process started");
+      } else {
+        console.error("Process failed");
+      }
+    } catch (error) {
+      console.error("Error starting process:", error);
+    }
   };
-  
-// Trapezoid class for Detection Wheel
-
-
 
   return (
     <div className="Options">
@@ -71,7 +97,10 @@ function Options() {
         <ul className="DetectionLevel">
           <ul className="DetectionLevelText">
             <li className="DetectionLevelMainText">Detection Level</li>
-            <li className="DetectionLevelSubText">Adjust the photo similarity threshold on the wheel to determine when photos should be treated as duplicates.</li>
+            <li className="DetectionLevelSubText">
+              Adjust the photo similarity threshold on the wheel to determine
+              when photos should be treated as duplicates.
+            </li>
           </ul>
           <ul className="DetectionWheelSection">
             <Octagon />
@@ -81,7 +110,7 @@ function Options() {
           <ul className="DuplicateRemovalSub">
             Remove Duplicates
             <button className="Process" onClick={handleProcessClick}>
-            Process
+              Process
             </button>
             <li className="DuplicateRemovalCheckBox">
               Remove Non-Media
@@ -94,8 +123,10 @@ function Options() {
             </li>
           </ul>
         </ul>
+        <ProgressBar progress={progress}></ProgressBar>
       </ul>
     </div>
   );
 }
+
 export default Options;

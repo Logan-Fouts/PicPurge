@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Options.css";
+import Octagon from './Octagon';
 
 
 function Options() {
@@ -51,6 +52,10 @@ function Options() {
     // TODO: Handle Response and Errors
   };
   
+// Trapezoid class for Detection Wheel
+
+
+
   return (
     <div className="Options">
       <ul className="OptionList">
@@ -69,17 +74,7 @@ function Options() {
             <li className="DetectionLevelSubText">Adjust the photo similarity threshold on the wheel to determine when photos should be treated as duplicates.</li>
           </ul>
           <ul className="DetectionWheelSection">
-            <select
-              className="Agro"
-              value={aggressiveness}
-              onChange={handleAggressivenessChange}
-            >
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
+            <Octagon />
           </ul>
         </ul>
         <ul className="DuplicateRemoval">
@@ -103,5 +98,4 @@ function Options() {
     </div>
   );
 }
-
 export default Options;

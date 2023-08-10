@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Options.css";
 import Octagon from "./Octagon";
 import ProgressBar from "./Progress";
+import Fire from "./Fire";
 
 function Options() {
   let oldProgress = 0
@@ -124,6 +125,7 @@ function Options() {
           </ul>
         </ul>
         <ProgressBar progress={progress}></ProgressBar>
+        <Fire></Fire>
       </ul>
     </div>
   );

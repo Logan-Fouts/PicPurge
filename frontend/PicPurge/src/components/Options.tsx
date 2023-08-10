@@ -5,7 +5,7 @@ import ProgressBar from "./Progress";
 import Fire from "./Fire";
 
 function Options() {
-  let oldProgress = 0
+  let oldProgress = 0;
   const [folderPath, setFolderPath] = useState("");
   const [aggressiveness, setAggressiveness] = useState("1");
   const [removeNonMedia, setRemoveNonMedia] = useState(false);
@@ -17,7 +17,7 @@ function Options() {
     if (buttonClicked) {
       progressInterval = setInterval(() => {
         fetchProgress();
-      }, 200);
+      }, 500);
     }
 
     return () => {
@@ -65,6 +65,10 @@ function Options() {
   };
 
   const handleProcessClick = async () => {
+    if (folderPath == "") {
+      console.log("No Folder Path Entered");
+      return;
+    }
     setButtonClicked(true); // Mark the button as clicked
 
     const url = `http://localhost:5002/picAPI/run/${encodeURIComponent(
@@ -74,7 +78,7 @@ function Options() {
     try {
       const response = await fetch(url);
       if (response.ok) {
-        console.log("Process started");
+        console.log("Processing Finished");
       } else {
         console.error("Process failed");
       }

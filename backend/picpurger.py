@@ -6,11 +6,12 @@ import os
 import shutil
 import threading
 import time
+import requests
 
 import imagehash
 from PIL import Image
 from tqdm import tqdm
-from flask import Flask, request, jsonify #Commuication with the Frontend for Pbar
+from flask import Flask, request, jsonify
 
 
 # Define supported image and video file extensions
@@ -22,7 +23,7 @@ num_images = -1
 lock = threading.Lock()
 
 #################################### Logic ####################################
-# Function to compare images using imagehash
+# Compare images using imagehash
 def compare_images(image1_path, image2_path, agro, pbar):
     global num_images
     try:
@@ -90,32 +91,24 @@ def process_image_pair(
 
 #################################### Initiation ####################################
 def init(folder_path, agro_threshold, keep_non_media):
-    global num_images
+    global num_images, pbar
 
     # Collect image paths
     image_paths = []
     for root, dirs, files in os.walk(folder_path):
-        # Ignore the folder named "Duplicate-Images"
         if "Duplicate-Images" in dirs:
             dirs.remove("Duplicate-Images")
 
         image_paths.extend([os.path.join(root, file) for file in files])
 
     num_images = len(image_paths)
-
-    # Calculate the total number of comparisons needed
     total_comparisons = (len(image_paths) * (len(image_paths) - 1)) // 2
-
-    # Initialize progress bar and lock for thread-safe updates
     pbar = tqdm(total=total_comparisons, desc="Progress", unit="comparisons")
 
-    # Create a separate folder for moving duplicate images
     output_folder = os.path.join(folder_path, "Duplicate-Images")
     os.makedirs(output_folder, exist_ok=True)
 
     batch_size = 500  # Number of images to process in each batch
-
-    # Split image paths into batches
     image_batches = [
         image_paths[i : i + batch_size] for i in range(0, len(image_paths), batch_size)
     ]
@@ -143,9 +136,8 @@ def init(folder_path, agro_threshold, keep_non_media):
 
     return pbar
 
-
 # Function to get the progress percentage from the tqdm progress bar
-def get_progress_update(pbar):
+def get_progress_update():
     if pbar is not None and pbar.total != 0: # Dont divide by 0
         progress_percentage = (pbar.n / pbar.total) * 100
         return progress_percentage

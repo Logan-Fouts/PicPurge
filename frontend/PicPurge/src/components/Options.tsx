@@ -38,6 +38,7 @@ function Options() {
           setProgress(newProgress);
           oldProgress = newProgress;
         } else {
+          setProgress(100);
           clearInterval(progressInterval);
         }
       }

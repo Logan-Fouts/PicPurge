@@ -1,12 +1,13 @@
 import urllib.parse
 from flask import Flask, jsonify
 from flask_cors import CORS
-from picpurger import init, get_progress_update
+from picpurger import ImageProcessor
 
 app = Flask(__name__)
 CORS(app)
 
-# Store the pbar object for access from other functions
+processor = ImageProcessor()
+
 pbar = None
 
 # End-point to run the purging script
@@ -14,13 +15,13 @@ pbar = None
 def run(file_path, agro, keep_non_media):
     global pbar
     decoded_file_path = "/" + urllib.parse.unquote(file_path)
-    pbar = init(decoded_file_path, int(agro), bool(keep_non_media))
+    pbar = processor.init(decoded_file_path, int(agro), bool(keep_non_media))
     return {"finished": f"{decoded_file_path}"}
 
 # End-point to retrieve progress bar percentage
 @app.route("/picAPI/get_progress", methods=["GET"])
 def get_progress():
-    progress_percentage = get_progress_update()
+    progress_percentage = processor.get_progress_update()
     return jsonify({"progress": progress_percentage})
 
 if __name__ == "__main__":

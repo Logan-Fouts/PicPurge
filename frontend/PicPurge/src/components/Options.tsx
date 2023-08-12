@@ -4,7 +4,6 @@ import Octagon from "./Octagon";
 import ProgressBar from "./Progress";
 import Fire from "./Fire";
 
-
 function Options() {
   let oldProgress = 0;
   const [folderPath, setFolderPath] = useState("");
@@ -54,6 +53,7 @@ function Options() {
     setFolderPath(event.target.value);
   };
 
+  // TODO: Make this do shit
   const handleAggressivenessChange = (event: {
     target: { value: React.SetStateAction<string> };
   }) => {
@@ -71,7 +71,7 @@ function Options() {
       console.log("No Folder Path Entered");
       return;
     }
-    setButtonClicked(true); // Mark the button as clicked
+    setButtonClicked(true);
 
     const url = `http://localhost:5002/picAPI/run/${encodeURIComponent(
       folderPath
@@ -87,16 +87,14 @@ function Options() {
     } catch (error) {
       console.error("Error starting process:", error);
     }
-
   };
-
 
   const handleFileButton = async () => {
     try {
-      const selectedPath = await window.electronAPI.openFiles();
+      const selectedPath = await (window as any).electronAPI.openFiles();
       if (selectedPath) {
         setFolderPath(selectedPath);
-        console.log('Folder Path:', selectedPath)
+        console.log("Folder Path:", selectedPath);
       } else {
         console.log("No folder selected.");
       }
@@ -104,20 +102,13 @@ function Options() {
       console.error("Error opening file explorer:", error);
     }
   };
-  
 
   return (
     <div className="Options">
       <ul className="OptionList">
         <li className="SelectFolder">
           Select Folder
-          <input
-            type="text"
-            className="FolderSelect"
-            value={folderPath}
-            onChange={handleFolderPathChange}
-          />
-          <button onClick={handleFileButton}>Get data</button>
+          <button onClick={handleFileButton}>Select Folder</button>
         </li>
         <ul className="DetectionLevel">
           <ul className="DetectionLevelText">

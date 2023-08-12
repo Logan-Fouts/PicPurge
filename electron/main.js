@@ -1,9 +1,7 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
-const path = require('path');
+const { app, BrowserWindow, ipcMain, dialog } = require("electron");
+const path = require("path");
 
-
-
-let mainWindow; // Define the mainWindow variable
+const url = "http://localhost:5173/";
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -17,7 +15,7 @@ function createWindow() {
     },
   });
 
-  mainWindow.loadURL("http://localhost:5173/");
+  mainWindow.loadURL(url);
 }
 
 app.whenReady().then(() => {
@@ -36,9 +34,9 @@ app.on("window-all-closed", () => {
   }
 });
 
-ipcMain.handle("open-file-explorer", async (event) => {
+ipcMain.handle("openFileExplorer", async (event) => {
   const result = await dialog.showOpenDialog(mainWindow, {
-    properties: ['openDirectory'], // Show only directories
+    properties: ["openDirectory"],
   });
 
   if (!result.canceled) {

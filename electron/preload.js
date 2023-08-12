@@ -2,9 +2,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 contextBridge.exposeInMainWorld("electronAPI", {
   openFiles: async () => {
-    const selectedPath = await ipcRenderer.invoke("open-file-explorer");
+    const selectedPath = await ipcRenderer.invoke("openFileExplorer");
     return selectedPath;
   },
 });
-
-

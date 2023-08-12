@@ -4,6 +4,7 @@ import Octagon from "./Octagon";
 import ProgressBar from "./Progress";
 import Fire from "./Fire";
 
+
 function Options() {
   let oldProgress = 0;
   const [folderPath, setFolderPath] = useState("");
@@ -86,7 +87,24 @@ function Options() {
     } catch (error) {
       console.error("Error starting process:", error);
     }
+
   };
+
+
+  const handleFileButton = async () => {
+    try {
+      const selectedPath = await window.electronAPI.openFiles();
+      if (selectedPath) {
+        setFolderPath(selectedPath);
+        console.log('Folder Path:', selectedPath)
+      } else {
+        console.log("No folder selected.");
+      }
+    } catch (error) {
+      console.error("Error opening file explorer:", error);
+    }
+  };
+  
 
   return (
     <div className="Options">
@@ -99,6 +117,7 @@ function Options() {
             value={folderPath}
             onChange={handleFolderPathChange}
           />
+          <button onClick={handleFileButton}>Get data</button>
         </li>
         <ul className="DetectionLevel">
           <ul className="DetectionLevelText">

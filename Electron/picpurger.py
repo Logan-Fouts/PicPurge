@@ -27,6 +27,10 @@ class ImageProcessor:
                     pbar.update(self.num_images)
                 else:
                     pbar.update(1)
+
+            progress_percentage = self.get_progress_update()
+            print(f"Progress: {progress_percentage:.2f}%")
+            
             return result
         except (FileNotFoundError, PIL.UnidentifiedImageError) as e:
             return False
@@ -126,7 +130,7 @@ class ImageProcessor:
 app = Flask(__name__)
 
 IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".gif", ".bmp"]
-VIDEO_EXTENSIONS = [".mp4", ".avi", ".mkv", ".mov"]
+VIDEO_EXTENSIONS = [".mp4", ".aavi", ".mkv", ".mov"]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Find and remove duplicate images.")

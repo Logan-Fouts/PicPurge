@@ -10,42 +10,16 @@ function Options() {
   const [aggressiveness, setAggressiveness] = useState("1");
   const [removeNonMedia, setRemoveNonMedia] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [buttonClicked, setButtonClicked] = useState(false);
-  let progressInterval: ReturnType<typeof setInterval> | undefined;
 
   useEffect(() => {
-    if (buttonClicked) {
-      progressInterval = setInterval(() => {
-        fetchProgress();
-      }, 500);
-    }
-
-    return () => {
-      if (progressInterval) {
-        clearInterval(progressInterval);
+    // Receive progress updates from the main process
+    (window as any).electronAPI.receive(
+      "progressUpdate",
+      (newProgress: number) => {
+        setProgress(newProgress);
       }
-    };
-  }, [buttonClicked]);
-
-  const fetchProgress = async () => {
-    try {
-      const response = await fetch("http://localhost:5002/picAPI/get_progress");
-      if (response.ok) {
-        const data = await response.json();
-        const newProgress = data.progress;
-
-        if (Number(newProgress) !== Number(oldProgress)) {
-          setProgress(newProgress);
-          oldProgress = newProgress;
-        } else {
-          setProgress(100);
-          clearInterval(progressInterval);
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching progress:", error);
-    }
-  };
+    );
+  }, []);
 
   const handleFolderPathChange = (event: {
     target: { value: React.SetStateAction<string> };
@@ -71,22 +45,8 @@ function Options() {
       console.log("No Folder Path Entered");
       return;
     }
-    setButtonClicked(true);
-
-    const url = `http://localhost:5002/picAPI/run/${encodeURIComponent(
-      folderPath
-    )}/${aggressiveness}/${removeNonMedia}`;
-
-    try {
-      const response = await fetch(url);
-      if (response.ok) {
-        console.log("Processing Finished");
-      } else {
-        console.error("Process failed");
-      }
-    } catch (error) {
-      console.error("Error starting process:", error);
-    }
+    // TODO: Fix Agro
+    await (window as any).electronAPI.process(folderPath, 2, removeNonMedia);
   };
 
   const handleFileButton = async () => {

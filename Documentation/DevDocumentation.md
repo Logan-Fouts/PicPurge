@@ -64,62 +64,6 @@ init(folder_path, agro_threshold, keep_non_media)
 ```
 
 In this example, the script will compare and remove duplicate images in the specified folder (`folder_path`) with an aggressiveness threshold of `3`. Non-media files will be removed (`keep_non_media = False`).
-## Backend *(api.py)*
-
-### Installation
-
-1. Make sure you have Python installed on your system.
-2. Install the required dependencies by running the following command:
-
-   ```bash
-   pip install flask flask_cors
-   ```
-
-### Usage
-
-1. Import the `init` function from the `picpurger` module in your Python script.
-2. Initialize a Flask application and enable CORS (Cross-Origin Resource Sharing).
-3. Define a route to handle the API request with the required parameters.
-4. Decode the `file_path` parameter using `urllib.parse.unquote`.
-5. Call the `init` function, passing the decoded `file_path`, `agro`, and `keep_non_media` parameters.
-6. Return a response indicating the completion of the process.
-
-### API Endpoint
-
-The API provides a single endpoint:
-
-#### Run Image Purge
-
-- Method: `GET`
-- Route: `/picAPI/run/<path:file_path>/<agro>/<keep_non_media>`
-- Parameters:
-  - `file_path` (string): The path to the folder containing the images. It should be URL-encoded to handle special characters and spaces.
-  - `agro` (integer): The aggressiveness threshold for duplicate image comparison. It should be an integer value between 0 and 5.
-  - `keep_non_media` (boolean): Determines whether to keep or remove non-media files. It should be a boolean value (`true` or `false`).
-- Response: Returns a JSON response indicating the completion of the process.
-
-### Example Usage
-
-```python
-import urllib.parse
-from flask import Flask
-from flask_cors import CORS
-from picpurger import init
-
-app = Flask(__name__)
-CORS(app)
-
-@app.route("/picAPI/run/<path:file_path>/<agro>/<keep_non_media>", methods=["GET"])
-def run(file_path, agro, keep_non_media):
-    decoded_file_path = "/" + urllib.parse.unquote(file_path)
-    init(decoded_file_path, int(agro), bool(keep_non_media))
-    return {"finished": f"{decoded_file_path}"}
-
-if __name__ == "__main__":
-    app.run(port=5002)
-```
-
-In this example, the Flask application is created with CORS enabled. The `/picAPI/run` endpoint is defined to handle the GET request with the required parameters: `file_path`, `agro`, and `keep_non_media`. The `file_path` parameter is URL-decoded using `urllib.parse.unquote`. The `init` function is called with the decoded parameters, and a JSON response is returned indicating the completion of the process. The API runs on port 5002 by default.
 
 ## Frontend *(Installing React and Electron)*
 
@@ -135,7 +79,7 @@ Before you begin, make sure you have the following prerequisites installed on yo
 
     1. Install the Electron package by running the following command:
 
-        ```bash
+        ```terminal
         npm install electron -g
         ```
 - radix-ui
@@ -146,24 +90,23 @@ Before you begin, make sure you have the following prerequisites installed on yo
         npm install @radix-ui/react-switch
         npm install @radix-ui/react-progress
         ```
+- vite
+    3. Install vite packages by running:
+        ```terminal
+        npm install vite
+        ```
 
 # Starting The Development Enviroment
-### Start The API
-1. Change into the PicPurge/backend directory
-2. Run:
-    ```bash
-    python api.py
-    ```
 ### Start The WebServer
-3. Change into the PicPurge/frontend/Picpurge directory
-4. Run:
+1. Change into the PicPurge/frontend/Picpurge directory
+2. Run:
     ```bash
     npm run dev
     ```
 - You can access the webpage from the link provided in the terminal
-### Test With Electron
-5. Change into the root direcotry of the project
-6. Run:
+### Start Electron
+3. Change into the root direcotry of the project
+4. Run:
     ```bash
     electron electron/
     ```

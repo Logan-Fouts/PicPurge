@@ -1,5 +1,5 @@
 .Options {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -8,92 +8,120 @@
   display: flex;
   flex-direction: column;
   align-content: center;
-  width: 50%;
+  width: 95%;
   font-size: 16px;
 }
+
 .SelectFolder {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  font-weight: 450;
-  font-size: 2.5rem;
+  font-weight: bold;
+  font-size: 2rem;
   padding: 0.75em;
-  outline: 2px solid black;
+  /* outline: 2px solid black; */
 }
+
+.FolderSelect {
+  overflow: hidden;
+  height: 3.5vh;
+  width: 5em;
+  margin-top: 1em;
+  margin-bottom: 0.35em;
+  min-height: 30px;
+  border-radius: 7.5px;
+  border: 0px;
+  font-size: large;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #000000; /* Set background color */
+  color: #fff; /* Set text color to white */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Add rounded corners */
+  cursor: pointer; /* Show pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
+}
+
+.FolderSelect:hover {
+  background-color: #139f3a; /* Darker color on hover */
+  transform: scale(
+    1.05
+  ); /* Slight scale increase on hover for interaction effect */
+}
+
+.FolderSelect:focus {
+  outline: none; /* Remove default focus outline */
+  background-color: #0040a6; /* Darker color when button is focused */
+}
+
 .DetectionLevel {
   display: flex;
-  height: 40vh;
+  /* height: 40vh; */
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 1em;
-  outline: 2px solid black;
+  /* padding: 1em; */
+  /* outline: 2px solid black; */
 }
+
 .DetectionLevelText {
   display: flex;
   height: 10vh;
-  width: 50%;
+  width: 100%;
   height: 100%;
   flex-direction: column;
   align-items: left;
   justify-content: center;
-  
 }
+
 .DetectionLevelMainText {
   display: flex;
   position: relative;
   align-items: left;
   font-size: 2.5em;
-  font-weight: 400;
+  font-weight: bold;
 }
+
 .DetectionLevelSubText {
   display: flex;
   padding-left: 0.25em;
   align-items: left;
-  font-size: 1em;
+  font-size: 0.7em;
 }
+
 .DetectionWheelSection {
-  display: flex;
-  width: 50%;
+  width: 800px;
   height: 100%;
-  justify-content: center; /* Align content to the left */
-  align-items: center; /* Center vertically */
 }
+
 .DuplicateRemoval {
   display: flex;
   height: 16vh;
   font-size: 1.8em;
-  font-weight: 400;
-  outline: 2px solid black;
+  font-weight: bold;
+  /* outline: 2px solid black; */
 }
+
 .DuplicateRemovalSub {
   display: flex;
   padding-top: 0.3em;
   flex-direction: column;
-  padding-left: 0.3em;
   justify-content: space-evenly;
   width: 36%;
   align-items: left;
   justify-content: left;
-  
 }
+
 .DuplicateRemovalCheckBox {
   display: flex;
   flex-direction: row;
   width: 100%;
-  font-size: .65em;
+  font-size: 0.65em;
   font-weight: 475;
   align-items: center;
   justify-content: space-between;
-}
-.FolderSelect {
-  padding: 10px;
-  height: 1vw;
-  width: 15vw;
-  margin-top: 1%;
-  font-size: large;
-  border-radius: 7.5px;
 }
 .Agro {
   height: 5vh;
@@ -106,8 +134,8 @@
   border-radius: 7.5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  
 }
+
 .Checkbox {
   height: 2.5vh;
   width: 2.5vh;
@@ -115,20 +143,20 @@
   background-color: #75c5e7;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
-  
 }
+
 .Process {
-  width: 9em;
+  width: 7em;
   overflow: hidden;
-  height: 4vh;
-  margin-top: 0.7em;
+  height: 3.5vh;
+  margin-top: 1em;
   margin-bottom: 0.35em;
   min-height: 30px;
   border-radius: 7.5px;
   border: 0px;
-  background-color: #75c5e7;
+  background-color: black;
   font-size: large;
-  font-weight: bolder;
+  font-weight: bold;
   color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   cursor: pointer;
@@ -153,8 +181,15 @@
 
 .Process:hover {
   transform: translateY(-2px);
-  background-color: blue;
+  background-color: rgb(234, 44, 31);
 }
+
+.ProcessSection {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+}
+
 .Agro:hover {
   transform: translateY(-2px);
   background-color: blue;

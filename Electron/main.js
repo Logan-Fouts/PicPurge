@@ -10,7 +10,7 @@ const scriptPath = "Electron/picpurger.py";
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1000,
-    height: 1000,
+    height: 800,
     resizable: true,
     webPreferences: {
       nodeIntegration: false,

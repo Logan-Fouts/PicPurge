@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Options.css";
-import Octagon from "./Octagon";
+import DetectionWheel from "./DetectionWheel";
 import ProgressBar from "./Progress";
 import Fire from "./Fire";
 
@@ -68,26 +68,24 @@ function Options() {
       <ul className="OptionList">
         <li className="SelectFolder">
           Select Folder
-          <button onClick={handleFileButton}>Select Folder</button>
+          <button className="FolderSelect" onClick={handleFileButton}>
+            Choose
+          </button>
         </li>
         <ul className="DetectionLevel">
           <ul className="DetectionLevelText">
             <li className="DetectionLevelMainText">Detection Level</li>
             <li className="DetectionLevelSubText">
-              Adjust the photo similarity threshold on the wheel to determine
-              when photos should be treated as duplicates.
+              Adjust the level of sensitivity for duplicate detection
             </li>
           </ul>
           <ul className="DetectionWheelSection">
-            <Octagon />
+            <DetectionWheel />
           </ul>
         </ul>
         <ul className="DuplicateRemoval">
           <ul className="DuplicateRemovalSub">
             Remove Duplicates
-            <button className="Process" onClick={handleProcessClick}>
-              Process
-            </button>
             <li className="DuplicateRemovalCheckBox">
               Remove Non-Media
               <input
@@ -97,10 +95,15 @@ function Options() {
                 onChange={handleRemoveNonMediaChange}
               />
             </li>
+            <div className="ProcessSection">
+              <button className="Process" onClick={handleProcessClick}>
+                Process
+              </button>
+              <ProgressBar progress={progress}></ProgressBar>
+            </div>
           </ul>
         </ul>
-        <ProgressBar progress={progress}></ProgressBar>
-        <Fire></Fire>
+        {/* <Fire></Fire> */}
       </ul>
     </div>
   );

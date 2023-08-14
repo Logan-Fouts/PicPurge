@@ -1,4 +1,5 @@
 .DetectionWheelSection {
-    width: 400px;
-    padding-right: 20px;
+  width: 400px;
+  padding-right: 20px;
+  transition: transform 1s ease-in-out;
 }

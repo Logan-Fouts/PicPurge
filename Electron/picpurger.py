@@ -2,6 +2,7 @@ import argparse
 import concurrent.futures
 import os
 import shutil
+import sys
 import threading
 import PIL
 from flask import Flask
@@ -74,6 +75,9 @@ class ImageProcessor:
 
         if self.compare_images(image1_path, image2_path, agro, pbar):
             try:
+                # print(f"Duplicate Found")
+                print("Duplicate_Found_Message")  # Print the message immediately
+                sys.stdout.flush()  # Flush the standard output
                 shutil.move(
                     image2_path, os.path.join(output_folder, os.path.basename(image2_path))
                 )
@@ -123,6 +127,7 @@ class ImageProcessor:
     def get_progress_update(self):
         if self.pbar is not None and self.pbar.total != 0:
             progress_percentage = (self.pbar.n / self.pbar.total) * 100
+            if progress_percentage > 100: return 100
             return progress_percentage
         else:
             return 0

@@ -80,8 +80,10 @@ ipcMain.handle(
         if (progressMatch) {
           const progressPercentage = parseFloat(progressMatch[1]);
           progressUpdates.push(progressPercentage);
-          // Send progress updates to the renderer process
           mainWindow.webContents.send("progressUpdate", progressPercentage);
+        }
+        if (output.includes("Duplicate_Found_Message")) {
+          mainWindow.webContents.send("duplicateFound");
         }
       });
 

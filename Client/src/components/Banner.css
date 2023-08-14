@@ -1,6 +1,6 @@
 .Banner {
   background-color: #f6caca;
-  width: 100vw;
+  width: 105vw;
   height: 8vh;
   margin: 0;
   display: flex;
@@ -12,4 +12,23 @@
 
 .Logo {
   height: 70%;
+  margin-left: 4rem;
+}
+
+.HelpButton {
+  margin-left: auto; /* This will push the button to the right end */
+  margin-right: 3rem;
+  padding: 0.125em 0.5em;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.HelpButton:hover {
+  background-color: #f6f6f6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }

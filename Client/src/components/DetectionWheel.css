@@ -1,4 +1,6 @@
 .DetectionWheelSection {
   width: 400px;
   transition: transform 1s ease-in-out;
+  margin-top: -1rem;
+  margin-bottom: -2rem;
 }

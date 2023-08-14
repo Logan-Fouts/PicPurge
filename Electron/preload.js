@@ -17,3 +17,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.on(channel, (event, ...args) => callback(...args));
   },
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.style.overflow = "hidden";
+  document.body.style.overflow = "hidden";
+});

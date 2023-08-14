@@ -1,13 +1,10 @@
 .Options {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
-  justify-content: center;
-  align-content: center;
 }
 .OptionList {
   display: flex;
   flex-direction: column;
-  align-content: center;
   width: 95%;
   font-size: 16px;
 }
@@ -15,11 +12,11 @@
 .SelectFolder {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-around;
   font-weight: bold;
   font-size: 2rem;
   padding: 0.75em;
+  margin-left: 3.5rem;
   /* outline: 2px solid black; */
 }
 
@@ -149,7 +146,6 @@
   width: 7em;
   overflow: hidden;
   height: 3.5vh;
-  margin-top: 1em;
   margin-bottom: 0.35em;
   min-height: 30px;
   border-radius: 7.5px;

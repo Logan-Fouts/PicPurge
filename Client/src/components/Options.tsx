@@ -10,6 +10,7 @@ function Options() {
   const [aggressiveness, setAggressiveness] = useState("1");
   const [removeNonMedia, setRemoveNonMedia] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [duplicates, setDuplicates] = useState(0);
 
   useEffect(() => {
     // Receive progress updates from the main process
@@ -19,6 +20,15 @@ function Options() {
         setProgress(newProgress);
       }
     );
+
+    let updateDuplicate = true;
+
+    (window as any).electronAPI.receive("duplicateFound", () => {
+      if (updateDuplicate) {
+        setDuplicates((prevDuplicates) => prevDuplicates + 1);
+      }
+      updateDuplicate = !updateDuplicate;
+    });
   }, []);
 
   const handleFolderPathChange = (event: {
@@ -100,6 +110,7 @@ function Options() {
                 Process
               </button>
               <ProgressBar progress={progress}></ProgressBar>
+              <h4>Duplicates Found: {duplicates}</h4>
             </div>
           </ul>
         </ul>

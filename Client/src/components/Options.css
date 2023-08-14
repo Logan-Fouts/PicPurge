@@ -1,12 +1,16 @@
 .Options {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
+
 .OptionList {
   display: flex;
   flex-direction: column;
   width: 95%;
   font-size: 16px;
+  margin-left: -1rem;
 }
 
 .SelectFolder {
@@ -15,9 +19,8 @@
   justify-content: space-around;
   font-weight: bold;
   font-size: 2rem;
-  padding: 0.75em;
-  margin-left: 3.5rem;
-  /* outline: 2px solid black; */
+  margin-left: 5rem;
+  margin-top: 2vh;
 }
 
 .FolderSelect {
@@ -25,7 +28,7 @@
   height: 3.5vh;
   width: 5em;
   margin-top: 1em;
-  margin-bottom: 0.35em;
+  margin-bottom: -1rem;
   min-height: 30px;
   border-radius: 7.5px;
   border: 0px;
@@ -38,7 +41,7 @@
   border: none; /* Remove border */
   border-radius: 8px; /* Add rounded corners */
   cursor: pointer; /* Show pointer cursor on hover */
-  transition: background-color 0.3s ease, transform 0.3s ease; /* Add smooth transitions */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .FolderSelect:hover {
@@ -55,12 +58,6 @@
 
 .DetectionLevel {
   display: flex;
-  /* height: 40vh; */
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  /* padding: 1em; */
-  /* outline: 2px solid black; */
 }
 
 .DetectionLevelText {
@@ -98,6 +95,7 @@
   height: 16vh;
   font-size: 1.8em;
   font-weight: bold;
+  margin-top: -2rem;
   /* outline: 2px solid black; */
 }
 
@@ -147,6 +145,7 @@
   overflow: hidden;
   height: 3.5vh;
   margin-bottom: 0.35em;
+  margin-top: 2vw;
   min-height: 30px;
   border-radius: 7.5px;
   border: 0px;
@@ -176,7 +175,7 @@
 }
 
 .Process:hover {
-  transform: translateY(-2px);
+  transform: scale(0.95);
   background-color: rgb(234, 44, 31);
 }
 
@@ -189,4 +188,34 @@
 .Agro:hover {
   transform: translateY(-2px);
   background-color: blue;
+}
+
+.RectangleContainer {
+  position: relative;
+  left: 15%;
+  top: -61%;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+}
+
+.GreyRectangle {
+  width: 110px;
+  height: 130px;
+  background-color: #1e2a35;
+  margin: 15px;
+  border-radius: 10px;
+}
+
+.ExampleText {
+  position: absolute;
+  top: auto;
+  left: 30%;
+  top: -35%;
+  text-align: center;
+}
+
+.folderPath {
+  font-size: medium;
+  margin-top: 2rem;
 }

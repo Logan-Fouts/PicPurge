@@ -5,12 +5,17 @@ import ProgressBar from "./Progress";
 import Fire from "./Fire";
 
 function Options() {
-  let oldProgress = 0;
   const [folderPath, setFolderPath] = useState("");
-  const [aggressiveness, setAggressiveness] = useState("1");
   const [removeNonMedia, setRemoveNonMedia] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duplicates, setDuplicates] = useState(0);
+  const [selectedDetection, setSelectedDetection] = useState<number | null>(
+    null
+  );
+
+  const handleDetectionSelect = (selected: number | null) => {
+    setSelectedDetection(selected);
+  };
 
   useEffect(() => {
     // Receive progress updates from the main process
@@ -31,19 +36,6 @@ function Options() {
     });
   }, []);
 
-  const handleFolderPathChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setFolderPath(event.target.value);
-  };
-
-  // TODO: Make this do shit
-  const handleAggressivenessChange = (event: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setAggressiveness(event.target.value);
-  };
-
   const handleRemoveNonMediaChange = (event: {
     target: { checked: boolean | ((prevState: boolean) => boolean) };
   }) => {
@@ -55,8 +47,12 @@ function Options() {
       console.log("No Folder Path Entered");
       return;
     }
-    // TODO: Fix Agro
-    await (window as any).electronAPI.process(folderPath, 2, removeNonMedia);
+
+    await (window as any).electronAPI.process(
+      folderPath,
+      selectedDetection,
+      removeNonMedia
+    );
   };
 
   const handleFileButton = async () => {
@@ -64,7 +60,6 @@ function Options() {
       const selectedPath = await (window as any).electronAPI.openFiles();
       if (selectedPath) {
         setFolderPath(selectedPath);
-        console.log("Folder Path:", selectedPath);
       } else {
         console.log("No folder selected.");
       }
@@ -81,6 +76,7 @@ function Options() {
           <button className="FolderSelect" onClick={handleFileButton}>
             Choose
           </button>
+          <p className="folderPath">Folder: {folderPath}</p>
         </li>
         <ul className="DetectionLevel">
           <ul className="DetectionLevelText">
@@ -90,7 +86,16 @@ function Options() {
             </li>
           </ul>
           <ul className="DetectionWheelSection">
-            <DetectionWheel />
+            <DetectionWheel onDetectionSelect={handleDetectionSelect} />
+            <div className="RectangleContainer">
+              <h5 className="ExampleText">
+                Possible Duplicates <br></br> At This Level
+              </h5>
+              <div className="GreyRectangle">
+                {/* <img className="exampleImage" src={} alt="me"></img> */}
+              </div>
+              <div className="GreyRectangle"></div>
+            </div>
           </ul>
         </ul>
         <ul className="DuplicateRemoval">

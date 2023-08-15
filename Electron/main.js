@@ -5,7 +5,8 @@ const { spawn } = require("child_process");
 // Settings:
 const url = "http://localhost:5173/";
 const pythonVersion = "python3";
-const scriptPath = "Electron/picpurger.py";
+const purgeScriptPath = "Electron/picpurger.py";
+const sortScriptPath = "Electron/picsort.py";
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -69,7 +70,7 @@ ipcMain.handle(
     try {
       const pythonProcess = spawn(pythonVersion, [
         "-u",
-        scriptPath,
+        purgeScriptPath,
         ...pythonArgs,
       ]);
 
@@ -99,3 +100,19 @@ ipcMain.handle(
     }
   }
 );
+
+ipcMain.handle("sortMedia", async (event, folderPath) => {
+  const pythonProcess = spawn(pythonVersion, [sortScriptPath, folderPath]);
+
+  pythonProcess.stdout.on("data", (data) => {
+    console.log(`Python stdout: ${data}`);
+  });
+
+  pythonProcess.stderr.on("data", (data) => {
+    console.error(`Python stderr: ${data}`);
+  });
+
+  pythonProcess.on("close", (code) => {
+    console.log(`Python process exited with code ${code}`);
+  });
+});

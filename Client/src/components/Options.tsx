@@ -55,6 +55,10 @@ function Options() {
     );
   };
 
+  const handleSortClick = async () => {
+    await (window as any).electronAPI.mediaSort(folderPath);
+  };
+
   const handleFileButton = async () => {
     try {
       const selectedPath = await (window as any).electronAPI.openFiles();
@@ -110,6 +114,9 @@ function Options() {
                 onChange={handleRemoveNonMediaChange}
               />
             </li>
+            <button className="Sort" onClick={handleSortClick}>
+              Sort
+            </button>
             <div className="ProcessSection">
               <button className="Process" onClick={handleProcessClick}>
                 Process

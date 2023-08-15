@@ -5,6 +5,37 @@
   overflow: hidden;
 }
 
+.Sort {
+  width: 3.5em;
+  overflow: hidden;
+  height: 3.5vh;
+  margin-bottom: 0.25rem;
+  min-height: 30px;
+  border-radius: 7.5px;
+  border: 0px;
+  background-color: black;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.Sort:hover {
+  animation: shake 0.15s ease-in-out;
+  animation-iteration-count: 2;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-3px);
+  }
+}
+
 .OptionList {
   display: flex;
   flex-direction: column;
@@ -182,6 +213,7 @@
 .ProcessSection {
   display: flex;
   width: 100vw;
+  height: 2rem;
   align-items: center;
 }
 

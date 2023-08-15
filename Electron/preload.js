@@ -16,6 +16,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
   receive: (channel, callback) => {
     ipcRenderer.on(channel, (event, ...args) => callback(...args));
   },
+  mediaSort: async (folderPath) => {
+    ipcRenderer.invoke("sortMedia", folderPath);
+  },
 });
 
 document.addEventListener("DOMContentLoaded", () => {

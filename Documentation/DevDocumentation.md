@@ -1,28 +1,30 @@
 # Development Documentation
 
-In the following I will try to explain to new developers whats needed to start working on this project. First I will show how to install dependencies, then show the steps to start the development enviroment. I would recommend only using electron when you want to just see how it works, while developing using the npm webserver as it automatically updates on save.
-## Backend *(picpurge.py)*
+This guide provides new developers with the information needed to start working on the project. It includes instructions for installing dependencies and setting up the development environment. For development purposes, it's recommended to use the npm web server to benefit from automatic updates on file saves. Electron should be used to view the website.
+
+## Backend (picpurge.py)
+
 ### Usage
 
-The script can be executed by calling the `init()` function and passing the required arguments:
+The backend script can be executed by calling the `init()` function and providing the required arguments:
 
 ```python
 init(folder_path, agro_threshold, keep_non_media)
 ```
 
-- `folder_path` (str): Path to the folder containing the images. The script will traverse the folder and its subdirectories to find images.
-- `agro_threshold` (int): Aggressiveness threshold for duplicate image comparison. It should be a value between 0 and 5, where a higher value indicates a stricter comparison.
-- `keep_non_media` (bool): Flag to determine whether to keep or remove non-media files (files with extensions other than supported image and video formats). Set it to `True` to keep non-media files and `False` to remove them.
+- `folder_path` (str): Path to the folder containing images. The script will search through the folder and its subdirectories to find images.
+- `agro_threshold` (int): Aggressiveness threshold for duplicate image comparison, ranging from 0 to 5. A higher value signifies a stricter comparison.
+- `keep_non_media` (bool): Flag to decide whether to retain or remove non-media files (files with extensions other than supported image and video formats). Set it to `True` to retain non-media files and `False` to remove them.
 
 ### Dependencies
 
 The script relies on the following Python libraries:
 
-- `imagehash`: Used for calculating the perceptual hash of images and comparing them.
+- `imagehash`: Used for calculating the perceptual hash of images and performing comparisons.
 - `PIL` (Python Imaging Library): Required for image processing and opening images.
 - `tqdm`: Used for displaying a progress bar during the image comparison process.
 
-Make sure to install these dependencies before running the script using the following command:
+Ensure you install these dependencies before running the script using the following command:
 
 ```bash
 pip install imagehash Pillow tqdm
@@ -37,79 +39,138 @@ The script supports the following image and video file formats for comparison:
 
 ### Processing Workflow
 
-The script follows the following workflow:
+The script follows this workflow:
 
-1. Calculate the total number of comparisons needed based on the number of images in the specified folder.
-2. Create a separate folder named "Duplicate-Images" within the provided folder path to store duplicate images.
-3. Traverse the folder and its subdirectories to collect the paths of all image files.
-4. Split the image paths into batches to process a certain number of images at a time.
-5. Process the image batches in parallel using multithreading.
-6. For each pair of images in a batch:
-   - Check if the file extensions of the images are supported image or video formats. If not, optionally remove the non-media file based on the `keep_non_media` flag.
-   - Compare the images using imagehash and the specified aggressiveness threshold.
-   - If the images are determined to be duplicates, move the second image to the "Duplicate-Images" folder.
-7. Update the progress bar to reflect the progress of the image comparison process.
-8. Upon completion, close the progress bar.
+1. Calculate the total number of required comparisons based on the number of images in the specified folder.
+2. Create a "Duplicate-Images" folder within the provided path to store duplicate images.
+3. Traverse the folder and its subdirectories to gather image file paths.
+4. Divide image paths into batches for parallel processing.
+5. Process image batches concurrently using multithreading.
+6. For each image pair in a batch:
+   - Check if file extensions are supported image or video formats. If not, optionally remove non-media files based on the `keep_non_media` flag.
+   - Compare images using imagehash and the specified aggressiveness threshold.
+   - If images are duplicates, move the second image to the "Duplicate-Images" folder.
+7. Update the progress bar to reflect the image comparison progress.
+8. Close the progress bar upon completion.
 
-### Example Usage
+## Backend (picsort.py)
 
-```python
-from image_purge import init
 
-folder_path = "/path/to/images"
-agro_threshold = 3
-keep_non_media = False
+### Image Sorting using InceptionV3 Model
 
-init(folder_path, agro_threshold, keep_non_media)
+This script utilizes the InceptionV3 model from TensorFlow to automatically sort images based on their predicted labels.
+
+#### Setup
+
+Before running the script, make sure you have the necessary dependencies installed. You can install them using the following command:
+
+```bash
+pip install tensorflow
 ```
 
-In this example, the script will compare and remove duplicate images in the specified folder (`folder_path`) with an aggressiveness threshold of `3`. Non-media files will be removed (`keep_non_media = False`).
+### Usage
 
-## Frontend *(Installing React and Electron)*
+1. Save the provided script as a `.py` file, e.g., `image_sorting.py`.
 
-This guide will walk you through the installation process for React and Electron, two popular frameworks for building cross-platform desktop applications.
+2. Open a terminal and navigate to the directory where the script is saved.
+
+3. Run the script by providing the path to the folder containing images to be sorted:
+
+```bash
+python image_sorting.py path/to/images
+```
+
+Replace `path/to/images` with the actual path to the folder containing the images.
+
+#### Script Overview
+
+1. The script loads the InceptionV3 model pre-trained on the ImageNet dataset.
+
+2. It defines the `predict_and_move` function that takes an image path and an output folder as arguments. This function:
+
+   - Loads and preprocesses the image using the appropriate dimensions.
+   - Predicts the label and confidence of the image using the InceptionV3 model.
+   - Creates a folder for the predicted category if it doesn't exist.
+   - Moves the image to the predicted category folder.
+
+3. The `process_batch` function utilizes multithreading to process a batch of images concurrently.
+
+4. The `main` function:
+   - Parses the command-line argument for the input folder.
+   - Iterates through the image files in the input folder.
+   - Processes images in batches using the `process_batch` function.
+
+##### Notes
+
+- The script will create a `Filtered-Images` folder within the input folder to store the sorted images.
+
+##### Example
+
+Assuming you have a folder named `unsorted_images` containing images to be sorted:
+
+```bash
+python image_sorting.py unsorted_images
+```
+
+The script will process the images using the InceptionV3 model and move them to respective category folders within the `Filtered-Images` folder.
+
+Remember to install the necessary dependencies before running the script.
+
+
+## Frontend (Installing React and Electron)
+
+This guide walks you through the installation process for React and Electron, popular frameworks for building cross-platform desktop applications.
 
 ### Prerequisites
 
-Before you begin, make sure you have the following prerequisites installed on your system:
+Before you start, ensure the following prerequisites are installed on your system:
 
-- Node.js (version 12 or higher): You can download and install Node.js from the official website: [https://nodejs.org](https://nodejs.org)
+- Node.js (version 12 or higher): Download and install Node.js from the official website: [https://nodejs.org](https://nodejs.org)
 
 - Electron
 
-    1. Install the Electron package by running the following command:
+    1. Install the Electron package by running this command:
 
         ```terminal
         npm install electron -g
         ```
+
 - radix-ui
 
-    2. Install the radix-ui packages by running the following commands:
+    2. Install the radix-ui packages with these commands:
 
         ```terminal
         npm install @radix-ui/react-switch
         npm install @radix-ui/react-progress
         ```
+
 - vite
-    3. Install vite packages by running:
+
+    3. Install the vite package:
+
         ```terminal
         npm install vite
         ```
 
-# Starting The Development Enviroment
-### Start The WebServer
-1. Change into the PicPurge/frontend/Picpurge directory
+### Starting The Development Environment
+
+#### Start The WebServer
+
+1. Navigate to the PicPurge/frontend/Picpurge directory.
 2. Run:
+
     ```bash
     npm run dev
     ```
-- You can access the webpage from the link provided in the terminal
-### Start Electron
-3. Change into the root direcotry of the project
+
+   You can access the webpage from the link provided in the terminal.
+
+#### Start Electron
+
+3. Go to the root directory of the project.
 4. Run:
+
     ```bash
     electron electron/
     ```
-
-___
-Hopefully this was enough to allow you to begin working on this project. 
+````

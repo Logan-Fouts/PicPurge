@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "vite": "^4.4.9"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.21"
   }
 }

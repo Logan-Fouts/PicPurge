@@ -29,7 +29,7 @@
   fill: #20DF00;
   transition: fill 0.3s ease, transform 0.3s ease;
   position: relative;
-  z-index: 10;
+  z-index: 11;
 }
 .TrapezoidContainer:hover .Number2{
   fill: #ffffff;
@@ -39,17 +39,7 @@
   fill: #27D800;
   transition: fill 0.3s ease, transform 0.3s ease;
   position: relative;
-  z-index: 10;
-}
-.TrapezoidContainer:hover .Number3{
-  fill: #ffffff;
-}
-
-.Number3 {
-  fill: #4BB400;
-  transition: fill 0.3s ease, transform 0.3s ease;
-  position: relative;
-  z-index: 10;
+  z-index: 12;
 }
 .TrapezoidContainer:hover .Number3{
   fill: #ffffff;
@@ -59,7 +49,7 @@
   fill: #6F9000;
   transition: fill 0.3s ease, transform 0.3s ease;
   position: relative;
-  z-index: 10;
+  z-index: 14;
 }
 .TrapezoidContainer:hover .Number4{
   fill: #ffffff;
@@ -69,7 +59,7 @@
   fill: #936C00;
   transition: fill 0.3s ease, transform 0.3s ease;
   position: relative;
-  z-index: 10;
+  z-index: 15;
 }
 .TrapezoidContainer:hover .Number5{
   fill: #ffffff;
@@ -79,7 +69,7 @@
   fill: #B74800;
   transition: fill 0.3s ease, transform 0.3s ease;
   position: relative;
-  z-index: 10;
+  z-index: 16;
 }
 .TrapezoidContainer:hover .Number6{
   fill: #ffffff;
@@ -89,7 +79,7 @@
   fill: #DB2400;
   transition: fill 0.3s ease, transform 0.3s ease;
   position: relative;
-  z-index: 10;
+  z-index: 17;
 }
 .TrapezoidContainer:hover .Number7{
   fill: #ffffff;
@@ -99,7 +89,7 @@
   fill: #FF0000;
   transition: fill 0.3s ease, transform 0.3s ease;
   position: relative;
-  z-index: 10;
+  z-index: 18;
 }
 .TrapezoidContainer:hover .Number8{
   fill: #ffffff;

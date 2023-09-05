@@ -3,6 +3,7 @@ import "./Options.css";
 import DetectionWheel from "./DetectionWheel";
 import ProgressBar from "./Progress";
 import Fire from "./Fire";
+import Darkmode from "./Darkmode";
 
 function Options() {
   const [folderPath, setFolderPath] = useState("");
@@ -76,11 +77,16 @@ function Options() {
     <div className="Options">
       <ul className="OptionList">
         <li className="SelectFolder">
-          Select Folder
-          <button className="FolderSelect" onClick={handleFileButton}>
-            Choose
-          </button>
-          <p className="folderPath">Folder: {folderPath}</p>
+          <div className="leftside">
+            Select Folder
+            <button className="FolderSelect" onClick={handleFileButton}>
+              Choose
+            </button>
+            <p className="folderPath">Folder: {folderPath}</p>
+          </div>
+          <div className="rightside">
+            <Darkmode></Darkmode>
+          </div>
         </li>
         <ul className="DetectionLevel">
           <ul className="DetectionLevelText">

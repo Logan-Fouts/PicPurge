@@ -6,10 +6,12 @@
 }
 
 .Sort {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 3.5em;
   overflow: hidden;
   height: 3.5vh;
-  margin-bottom: 0.25rem;
   min-height: 30px;
   border-radius: 7.5px;
   border: 0px;
@@ -38,27 +40,45 @@
 
 .OptionList {
   display: flex;
+  align-items: center;
   flex-direction: column;
-  width: 95%;
+  justify-content: center;
+  width: 100%;
   font-size: 16px;
-  margin-left: -1rem;
 }
 
 .SelectFolder {
   display: flex;
+  flex-direction: row;
+  width: 54.58%;
+  justify-content: space-between;
+  align-items: center; /* Center vertically */
+  margin-top: 2vh;
+  
+}
+
+.leftside {
+  display: flex;
   flex-direction: column;
-  justify-content: space-around;
   font-weight: bold;
   font-size: 2rem;
-  margin-left: 5rem;
-  margin-top: 2vh;
+  
+}
+.rightside {
+  display: flex;
+  font-size: large;
+  height: 84%;
+  
 }
 
 .FolderSelect {
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
   overflow: hidden;
   height: 3.5vh;
   width: 5em;
-  margin-top: 1em;
+  margin-top: .8em;
   margin-bottom: -1rem;
   min-height: 30px;
   border-radius: 7.5px;
@@ -89,10 +109,12 @@
 
 .DetectionLevel {
   display: flex;
+  width: 60%;
 }
 
 .DetectionLevelText {
   display: flex;
+  margin-right: 4rem;
   height: 10vh;
   width: 100%;
   height: 100%;
@@ -113,12 +135,13 @@
   display: flex;
   padding-left: 0.25em;
   align-items: left;
-  font-size: 0.7em;
+  font-size: 1.4em;
 }
 
 .DetectionWheelSection {
   width: 800px;
   height: 100%;
+  
 }
 
 .DuplicateRemoval {
@@ -126,13 +149,12 @@
   height: 16vh;
   font-size: 1.8em;
   font-weight: bold;
-  margin-top: -2rem;
+  width: 60%;
   /* outline: 2px solid black; */
 }
 
 .DuplicateRemovalSub {
   display: flex;
-  padding-top: 0.3em;
   flex-direction: column;
   justify-content: space-evenly;
   width: 36%;
@@ -172,11 +194,12 @@
 }
 
 .Process {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 7em;
   overflow: hidden;
   height: 3.5vh;
-  margin-bottom: 0.35em;
-  margin-top: 2vw;
   min-height: 30px;
   border-radius: 7.5px;
   border: 0px;
@@ -195,7 +218,10 @@
   animation: ripple-animation 0.6s linear;
   background-color: rgba(255, 255, 255, 0.5);
   pointer-events: none;
-  z-index: -1;
+  z-index: 100;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
 }
 
 @keyframes ripple-animation {
@@ -212,6 +238,8 @@
 
 .ProcessSection {
   display: flex;
+  flex-direction: row;
+  margin-top: .3em;
   width: 100vw;
   height: 2rem;
   align-items: center;
@@ -234,7 +262,7 @@
 .GreyRectangle {
   width: 110px;
   height: 130px;
-  background-color: #1e2a35;
+  background-color: #000000;
   margin: 15px;
   border-radius: 10px;
 }

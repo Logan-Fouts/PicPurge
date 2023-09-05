@@ -11,9 +11,9 @@ const sortScriptPath = "Electron/picsort.py";
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1000,
-    height: 800,
-    minWidth: 900,
-    minHeight: 900,
+    height: 1000,
+    minWidth: 1000,
+    minHeight: 1000,
     resizable: true,
     webPreferences: {
       nodeIntegration: false,

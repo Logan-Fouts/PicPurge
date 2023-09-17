@@ -54,7 +54,6 @@
   justify-content: space-between;
   align-items: center; /* Center vertically */
   margin-top: 2vh;
-  
 }
 
 .leftside {
@@ -62,13 +61,11 @@
   flex-direction: column;
   font-weight: bold;
   font-size: 2rem;
-  
 }
 .rightside {
   display: flex;
   font-size: large;
   height: 84%;
-  
 }
 
 .FolderSelect {
@@ -78,7 +75,7 @@
   overflow: hidden;
   height: 3.5vh;
   width: 5em;
-  margin-top: .8em;
+  margin-top: 0.8em;
   margin-bottom: -1rem;
   min-height: 30px;
   border-radius: 7.5px;
@@ -141,7 +138,6 @@
 .DetectionWheelSection {
   width: 800px;
   height: 100%;
-  
 }
 
 .DuplicateRemoval {
@@ -239,7 +235,7 @@
 .ProcessSection {
   display: flex;
   flex-direction: row;
-  margin-top: .3em;
+  margin-top: 0.3em;
   width: 100vw;
   height: 2rem;
   align-items: center;

@@ -14,6 +14,25 @@ function Options() {
     null
   );
 
+  const imageMappings = {
+    1: "/src/components/images/Examples/1/image1.png",
+    2: "/src/components/images/Examples/1/image2.png",
+    3: "/src/components/images/Examples/2/image1.png",
+    4: "/src/components/images/Examples/2/image2.png",
+    5: "/src/components/images/Examples/3/image1.png",
+    6: "/src/components/images/Examples/3/image2.png",
+    7: "/src/components/images/Examples/4/image1.png",
+    8: "/src/components/images/Examples/4/image2.png",
+    9: "/src/components/images/Examples/5/image1.png",
+    10: "/src/components/images/Examples/5/image2.png",
+    11: "/src/components/images/Examples/6/image1.png",
+    12: "/src/components/images/Examples/6/image2.png",
+    13: "/src/components/images/Examples/7/image1.png",
+    14: "/src/components/images/Examples/7/image2.png",
+    15: "/src/components/images/Examples/8/image1.png",
+    16: "/src/components/images/Examples/8/image2.png",
+  };
+
   const handleDetectionSelect = (selected: number | null) => {
     setSelectedDetection(selected);
   };
@@ -102,24 +121,29 @@ function Options() {
                 Possible Duplicates <br></br> At This Level
               </h5>
               <div className="GreyRectangle">
-                {/* <img className="exampleImage" src={} alt="me"></img> */}
+                {selectedDetection !== null && (
+                  <img
+                    className="ExampleImage"
+                    src={imageMappings[selectedDetection * 2 -1]}
+                    alt=""
+                  />
+                )}
               </div>
-              <div className="GreyRectangle"></div>
+              <div className="GreyRectangle">
+                {selectedDetection !== null && (
+                  <img
+                    className="ExampleImage"
+                    src={imageMappings[selectedDetection * 2]}
+                    alt=""
+                  />
+                )}
+              </div>
             </div>
           </ul>
         </ul>
         <ul className="DuplicateRemoval">
           <ul className="DuplicateRemovalSub">
             Remove Duplicates
-            <li className="DuplicateRemovalCheckBox">
-              Remove Non-Media
-              <input
-                type="checkbox"
-                className="Checkbox"
-                checked={removeNonMedia}
-                onChange={handleRemoveNonMediaChange}
-              />
-            </li>
             <button className="Sort" onClick={handleSortClick}>
               Sort
             </button>

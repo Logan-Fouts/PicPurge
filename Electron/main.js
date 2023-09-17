@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
 const path = require("path");
 const { spawn } = require("child_process");
+const { symlinkSync } = require("fs");
 
 // Settings:
 const url = "http://localhost:5173/";
@@ -57,16 +58,7 @@ ipcMain.handle(
   "runScript",
   async (event, folderPath, aggressiveness, removeNonMedia) => {
     let pythonArgs = null;
-    if (!removeNonMedia) {
-      pythonArgs = [
-        String(folderPath),
-        Number(aggressiveness),
-        "--keep_non_media",
-      ];
-    } else {
-      pythonArgs = [String(folderPath), Number(aggressiveness)];
-    }
-
+    pythonArgs = [String(folderPath), Number(aggressiveness)];
     const progressUpdates = [];
 
     try {

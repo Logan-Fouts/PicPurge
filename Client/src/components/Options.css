@@ -275,6 +275,16 @@
   text-align: center;
 }
 
+.ExampleImage {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.ExampleImage.slow-load {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
 .folderPath {
   font-size: medium;
   margin-top: 2rem;

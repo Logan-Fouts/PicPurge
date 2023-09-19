@@ -3,7 +3,6 @@ const path = require("path");
 const { spawn } = require("child_process");
 const { symlinkSync } = require("fs");
 
-// Settings:
 const url = "http://localhost:5173/";
 const pythonVersion = "python3";
 const purgeScriptPath = "Electron/picpurger.py";
@@ -12,10 +11,8 @@ const sortScriptPath = "Electron/picsort.py";
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1000,
-    height: 1000,
-    minWidth: 1000,
-    minHeight: 1000,
-    resizable: true,
+    height: 900,
+    resizable: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -23,6 +20,7 @@ function createWindow() {
     },
   });
 
+  // mainWindow.setMenu(null);
   mainWindow.loadURL(url);
 }
 
@@ -74,6 +72,7 @@ ipcMain.handle(
         const progressMatch = output.match(/Progress: ([\d.]+)/);
         if (progressMatch) {
           const progressPercentage = parseFloat(progressMatch[1]);
+          console.log("sending: " + progressPercentage)
           progressUpdates.push(progressPercentage);
           mainWindow.webContents.send("progressUpdate", progressPercentage);
         }

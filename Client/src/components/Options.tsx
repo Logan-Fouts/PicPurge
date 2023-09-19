@@ -43,6 +43,7 @@ function Options() {
       "progressUpdate",
       (newProgress: number) => {
         setProgress(newProgress);
+        console.log(newProgress)
       }
     );
 
@@ -94,70 +95,67 @@ function Options() {
 
   return (
     <div className="Options">
-      <ul className="OptionList">
-        <li className="SelectFolder">
-          <div className="leftside">
-            Select Folder
-            <button className="FolderSelect" onClick={handleFileButton}>
-              Choose
-            </button>
-            <p className="folderPath">Folder: {folderPath}</p>
-          </div>
-          <div className="rightside">
-            <Darkmode></Darkmode>
-          </div>
-        </li>
-        <ul className="DetectionLevel">
-          <ul className="DetectionLevelText">
-            <li className="DetectionLevelMainText">Detection Level</li>
-            <li className="DetectionLevelSubText">
-              Adjust the level of sensitivity for duplicate detection
-            </li>
-          </ul>
-          <ul className="DetectionWheelSection">
-            <DetectionWheel onDetectionSelect={handleDetectionSelect} />
-            <div className="RectangleContainer">
-              <h5 className="ExampleText">
-                Possible Duplicates <br></br> At This Level
-              </h5>
-              <div className="GreyRectangle">
-                {selectedDetection !== null && (
-                  <img
-                    className="ExampleImage"
-                    src={imageMappings[selectedDetection * 2 -1]}
-                    alt=""
-                  />
-                )}
-              </div>
-              <div className="GreyRectangle">
-                {selectedDetection !== null && (
-                  <img
-                    className="ExampleImage"
-                    src={imageMappings[selectedDetection * 2]}
-                    alt=""
-                  />
-                )}
-              </div>
-            </div>
-          </ul>
-        </ul>
-        <ul className="DuplicateRemoval">
-          <ul className="DuplicateRemovalSub">
-            Remove Duplicates
-            <button className="Sort" onClick={handleSortClick}>
-              Sort
-            </button>
-            <div className="ProcessSection">
-              <button className="Process" onClick={handleProcessClick}>
-                Process
-              </button>
-              <ProgressBar progress={progress}></ProgressBar>
-              <h4>Duplicates Found: {duplicates}</h4>
-            </div>
-          </ul>
-        </ul>
-        {/* <Fire></Fire> */}
+      <div className="DarkModeButton">
+        <Darkmode></Darkmode>
+      </div>
+      <ul className="SelectFolderText">
+        <li>Select Folder</li>
       </ul>
+      <button className="FolderSelect" onClick={handleFileButton}>
+        Choose
+      </button>
+      <p className="folderPath">Folder: {folderPath}</p>
+      <div className="rightside"></div>
+      <ul className="DetectionLevel">
+        <ul className="DetectionLevelText">
+          <li className="DetectionLevelMainText">Detection Level</li>
+          <li className="DetectionLevelSubText">
+            Adjust the level of sensitivity for duplicate detection
+          </li>
+        </ul>
+        <ul className="DetectionWheelSection">
+          <DetectionWheel onDetectionSelect={handleDetectionSelect} />
+          <div className="RectangleContainer">
+            <h5 className="ExampleText">
+              Possible Duplicates <br></br> At This Level
+            </h5>
+            <div className="GreyRectangle">
+              {selectedDetection !== null && (
+                <img
+                  className="ExampleImage"
+                  src={imageMappings[selectedDetection * 2 - 1]}
+                  alt=""
+                />
+              )}
+            </div>
+            <div className="GreyRectangle">
+              {selectedDetection !== null && (
+                <img
+                  className="ExampleImage"
+                  src={imageMappings[selectedDetection * 2]}
+                  alt=""
+                />
+              )}
+            </div>
+          </div>
+        </ul>
+      </ul>
+      <ul className="DuplicateRemoval">
+        <ul className="DuplicateRemovalSub">
+          Remove Duplicates
+          <div className="ProcessSection">
+            <button className="Process" onClick={handleProcessClick}>
+              Process
+            </button>
+            <ProgressBar progress={progress}></ProgressBar>
+            <h4>Duplicates Found: {duplicates}</h4>
+          </div>
+          <button className="Sort" onClick={handleSortClick}>
+            Sort
+          </button>
+        </ul>
+      </ul>
+      {/* <Fire></Fire> */}
     </div>
   );
 }

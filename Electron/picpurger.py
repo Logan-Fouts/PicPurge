@@ -3,6 +3,7 @@ import math
 import sys
 import os
 import glob
+import time
 from PIL import Image
 import imagehash
 import shutil
@@ -24,7 +25,7 @@ def find_image_files(image_dir, image_extensions):
 
 def compute_image_hash(image_file):
     try:
-        img = Image.open(image_file)
+        img = Image.open(image_file).convert("RGBA")
         img_hash = str(imagehash.dhash(img))
         return image_file, img_hash
     except Exception as e:
@@ -38,6 +39,7 @@ def compute_image_hashes(
     agro_threshold,
     batch_size=float(math.inf),
     progress=None,
+    progress_queue=None,
 ):
     image_files = find_image_files(image_dir, image_extensions)
 
@@ -46,13 +48,16 @@ def compute_image_hashes(
 
     total_images = len(image_files)
 
+    total_images = len(image_files)
+    processed_images = 0
+
     with Pool(num_workers) as pool:
         try:
             for result in pool.imap(compute_image_hash, image_files):
                 if result:
                     image_file, img_hash = result
                     batch_hashes.append((image_file, img_hash))
-                    progress.value += 1
+                    processed_images += 1
 
                     if len(batch_hashes) >= batch_size:
                         compare_hashes(
@@ -63,6 +68,12 @@ def compute_image_hashes(
                             agro_threshold,
                         )
                         batch_hashes = []
+
+                        progress_percentage = (processed_images / total_images) * 100
+                        progress_queue.put(progress_percentage)
+                        # print(f"Progress: {progress_percentage:.2f}%")
+                        sys.stdout.flush()
+                        # time.sleep(0.1)
 
             compare_hashes(
                 batch_hashes, hashes, duplicate_folder, image_files, agro_threshold
@@ -84,9 +95,6 @@ def compare_hashes(
     processed_images = len(all_hashes)
     progress_percentage = (processed_images / total_images) * 100
 
-    sys.stdout.flush()
-    print(f"Progress: {progress_percentage:.2f}%")
-
     for i, (file, hash_val) in enumerate(batch_hashes, start=1):
         duplicates = []
         for existing_file, existing_hash in all_hashes.items():
@@ -97,11 +105,6 @@ def compare_hashes(
         all_hashes[file] = hash_val
         if duplicates:
             move_duplicates(file, duplicates, duplicate_folder, image_files)
-
-        progress_percentage = ((processed_images + i) / total_images) * 100
-        sys.stdout.flush()
-        print(f"Progress: {progress_percentage:.2f}%")
-
 
 def move_duplicates(file, duplicates, duplicate_folder, image_files):
     if not os.path.exists(duplicate_folder):
@@ -142,10 +145,16 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    print("Starting")
+
     duplicate_folder = args.folder_path + "/Duplicate Images"
 
     with Manager() as manager:
-        progress = manager.Value("i", 0)
+        progress_queue = manager.Queue()
         hashes = compute_image_hashes(
-            args.folder_path, duplicate_folder, args.agro_threshold, progress=progress
+            args.folder_path, duplicate_folder, args.agro_threshold, progress_queue=progress_queue
         )
+
+        while not progress_queue.empty():
+            progress_percentage = progress_queue.get()
+            print(f"Progress: {progress_percentage:.2f}%")

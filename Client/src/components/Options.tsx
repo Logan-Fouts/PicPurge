@@ -43,7 +43,6 @@ function Options() {
       "progressUpdate",
       (newProgress: number) => {
         setProgress(newProgress);
-        console.log(newProgress)
       }
     );
 

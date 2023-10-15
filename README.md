@@ -1,9 +1,8 @@
 <div style="text-align:center">
   <img src="./images/logo-no-background.png" alt="Alt text" width="400">
 </div>
-
+![The GUI](images/gui.png)
 A Python script that facilitates the identification and removal of duplicate images within a designated directory, as well as image sorting using Machine Learning. This script utilizes image hashing for comparison purposes and now incorporates sorting functionality using TensorFlow for enhanced efficiency. The script offers both a command-line interface and a user-friendly GUI for seamless utilization.
-
 ## GUI Usage
 
 1. **Choose Folder**: Click the "Browse" button to select the target folder containing the images.

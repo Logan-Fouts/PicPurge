@@ -5,6 +5,7 @@
 ![The GUI](images/gui.png)
 
 A Python script that facilitates the identification and removal of duplicate images within a designated directory, as well as image sorting using Machine Learning. This script utilizes image hashing for comparison purposes and now incorporates sorting functionality using TensorFlow for enhanced efficiency. The script offers both a command-line interface and a user-friendly GUI for seamless utilization.
+
 ## GUI Usage
 
 1. **Choose Folder**: Click the "Browse" button to select the target folder containing the images.
@@ -26,8 +27,7 @@ pip install Flask imagehash tensorflow tqdm
 
 ## How It Works
 
+- The logic behind near duplicate detection is complicated. It has a dedicated repo [here](https://github.com/Logan-Fouts/Thesis) developed as part of a thesis.
 - The script leverages image hashing to facilitate image comparison, and now employs TensorFlow for efficient sorting, thereby enhancing the identification of duplicate images based on the designated threshold (agro_threshold).
-- Duplicate images are systematically organized into a "Duplicate-Images" subfolder within the original directory.
-- Images with file extensions such as `.jpg`, `.jpeg`, `.png`, `.gif`, `.bmp`, `.mp4`, `.avi`, `.mkv`, and `.mov` are eligible for comparison. The option to eliminate non-media files is accessible through the "Retain Non-Media Files" checkbox.
 
 We welcome your valuable feedback and encourage you to report any encountered issues for further refinement.

@@ -5,7 +5,7 @@ const { symlinkSync } = require("fs");
 
 const url = "http://localhost:5173/";
 const pythonVersion = "python3";
-const purgeScriptPath = "Electron/picpurger.py";
+const purgeScriptPath = "Electron/Framework/main.py";
 const sortScriptPath = "Electron/picsort.py";
 
 function createWindow() {
@@ -56,7 +56,7 @@ ipcMain.handle(
   "runScript",
   async (event, folderPath, aggressiveness, removeNonMedia) => {
     let pythonArgs = null;
-    pythonArgs = [String(folderPath), Number(aggressiveness)];
+    pythonArgs = [String(folderPath)];
     const progressUpdates = [];
 
     try {
@@ -72,9 +72,11 @@ ipcMain.handle(
         const progressMatch = output.match(/Progress: ([\d.]+)/);
         if (progressMatch) {
           const progressPercentage = parseFloat(progressMatch[1]);
-          console.log("sending: " + progressPercentage)
+          console.log("sending: " + progressPercentage);
           progressUpdates.push(progressPercentage);
           mainWindow.webContents.send("progressUpdate", progressPercentage);
+        } else {
+          console.log(output);
         }
         if (output.includes("Duplicate_Found_Message")) {
           mainWindow.webContents.send("duplicateFound");
@@ -91,7 +93,7 @@ ipcMain.handle(
     } catch (error) {
       console.error(error);
     }
-  }
+  },
 );
 
 ipcMain.handle("sortMedia", async (event, folderPath) => {

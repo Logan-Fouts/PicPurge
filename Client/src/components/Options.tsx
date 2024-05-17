@@ -11,14 +11,14 @@ function Options() {
   const [progress, setProgress] = useState(0);
   const [duplicates, setDuplicates] = useState(0);
   const [selectedDetection, setSelectedDetection] = useState<number | null>(
-    null
+    null,
   );
 
   const imageMappings = {
-    1: "/src/components/images/Examples/1/image1.png",
-    2: "/src/components/images/Examples/1/image2.png",
-    3: "/src/components/images/Examples/2/image1.png",
-    4: "/src/components/images/Examples/2/image2.png",
+    1: "/src/components/images/Examples/Personal/1.jpg",
+    2: "/src/components/images/Examples/Personal/2.jpg",
+    3: "/src/components/images/Examples/fingers/fingerprint2.png",
+    4: "/src/components/images/Examples/fingers/fingerprint2.png",
     5: "/src/components/images/Examples/3/image1.png",
     6: "/src/components/images/Examples/3/image2.png",
     7: "/src/components/images/Examples/4/image1.png",
@@ -43,7 +43,7 @@ function Options() {
       "progressUpdate",
       (newProgress: number) => {
         setProgress(newProgress);
-      }
+      },
     );
 
     let updateDuplicate = true;
@@ -71,7 +71,7 @@ function Options() {
     await (window as any).electronAPI.process(
       folderPath,
       selectedDetection,
-      removeNonMedia
+      removeNonMedia,
     );
   };
 
@@ -94,9 +94,7 @@ function Options() {
 
   return (
     <div className="Options">
-      <div className="DarkModeButton">
-        <Darkmode></Darkmode>
-      </div>
+      <div className="DarkModeButton">{/* <Darkmode></Darkmode> */}</div>
       <ul className="SelectFolderText">
         <li>Select Folder</li>
       </ul>
@@ -107,16 +105,16 @@ function Options() {
       <div className="rightside"></div>
       <ul className="DetectionLevel">
         <ul className="DetectionLevelText">
-          <li className="DetectionLevelMainText">Detection Level</li>
+          <li className="DetectionLevelMainText">Preset</li>
           <li className="DetectionLevelSubText">
-            Adjust the level of sensitivity for duplicate detection
+            Select a preset that matches your image set domain
           </li>
         </ul>
         <ul className="DetectionWheelSection">
           <DetectionWheel onDetectionSelect={handleDetectionSelect} />
           <div className="RectangleContainer">
             <h5 className="ExampleText">
-              Possible Duplicates <br></br> At This Level
+              Example Images <br></br> For This Preset
             </h5>
             <div className="GreyRectangle">
               {selectedDetection !== null && (

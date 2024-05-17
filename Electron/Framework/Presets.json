@@ -1,0 +1,36 @@
+{
+  "data_set": "FingerPrints",
+  "image_paths": {
+    "path": "Images/Altered/Altered-Easy"
+  },
+  "layers": [
+    {
+      "type": "Phash",
+      "parameters": {
+        "threshold": 4
+      }
+    },
+    {
+      "type": "Dhash",
+      "parameters": {
+        "threshold": 3
+      }
+    },
+    {
+      "type": "SIFT",
+      "parameters": {
+        "threshold": 17,
+        "sigma": 1.8,
+        "edge_threshold": 10000,
+        "nOctaveLayers": 3,
+        "contrast_threshold": 0.01
+      }
+    },
+    {
+      "type": "SSIM",
+      "parameters": {
+        "threshold": 0.8
+      }
+    }
+  ]
+}

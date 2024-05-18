@@ -1,6 +1,7 @@
 import os
 import random
 import shutil
+import time
 import sys
 
 from Wrapper.wrapper import Wrapper
@@ -98,6 +99,10 @@ class Layers:
 
         lst = [item for tup in self.result_duplicates for item in tup]
         curr_paths = set(image_paths) - set(lst)
+
+        for _ in range(len(curr_paths)):
+            print("Duplicate_Found_Message")
+            time.sleep(0.0001)
 
         self.result_duplicates = self.group_related_images(self.result_duplicates)
 

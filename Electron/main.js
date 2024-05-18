@@ -20,7 +20,7 @@ function createWindow() {
     },
   });
 
-  // mainWindow.setMenu(null);
+  mainWindow.setMenu(null);
   mainWindow.loadURL(url);
 }
 
@@ -54,9 +54,9 @@ ipcMain.handle("openFileExplorer", async (event) => {
 
 ipcMain.handle(
   "runScript",
-  async (event, folderPath, aggressiveness, removeNonMedia) => {
+  async (event, folderPath, preset, removeNonMedia) => {
     let pythonArgs = null;
-    pythonArgs = [String(folderPath)];
+    pythonArgs = [String(folderPath), String(preset)];
     const progressUpdates = [];
 
     try {

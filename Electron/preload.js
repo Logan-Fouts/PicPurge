@@ -5,12 +5,12 @@ contextBridge.exposeInMainWorld("electronAPI", {
     const selectedPath = await ipcRenderer.invoke("openFileExplorer");
     return selectedPath;
   },
-  process: async (folderPath, aggressiveness, removeNonMedia) => {
+  process: async (folderPath, preset, removeNonMedia) => {
     const progressUpdates = await ipcRenderer.invoke(
       "runScript",
       folderPath,
-      aggressiveness,
-      removeNonMedia
+      preset,
+      removeNonMedia,
     );
   },
   receive: (channel, callback) => {

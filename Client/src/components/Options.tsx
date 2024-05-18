@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Options.css";
 import DetectionWheel from "./DetectionWheel";
 import ProgressBar from "./Progress";
-import Fire from "./Fire";
-import Darkmode from "./Darkmode";
 
 function Options() {
   const [folderPath, setFolderPath] = useState("");

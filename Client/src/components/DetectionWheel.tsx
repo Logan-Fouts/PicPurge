@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./DetectionWheel.css";
+import Trapezoid from "./Trapazoid";
 
 interface DetectionWheelProps {
   onDetectionSelect: (selected: number | null) => void;
@@ -24,6 +25,17 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
     const calculatedAngle = baseAngle - id * angleStep;
     return calculatedAngle;
   };
+
+  const trapezoids = [
+    { rotation: 0, number: 1, text: "Personal", color: "#00FF00" },
+    { rotation: 45, number: 2, text: "Fin-Print", color: "#20DF00" },
+    { rotation: 90, number: 3, text: "Copyright", color: "#40BF00" },
+    { rotation: 135, number: 4, text: "Forensics", color: "#6F9000" },
+    { rotation: 180, number: 5, text: "Security", color: "#936C00" },
+    { rotation: 225, number: 6, text: "QC", color: "#B74800" },
+    { rotation: 270, number: 7, text: "Archiving", color: "#DB2400" },
+    { rotation: 315, number: 8, text: "Law", color: "#FF0000" },
+  ];
 
   return (
     <svg
@@ -68,281 +80,16 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
         d="M400 84L623.446 176.554L716 400L623.446 623.446L400 716L176.554 623.446L84 400L176.554 176.554L400 84Z"
         fill="#FCEFEF"
       />
-      <svg width="800" height="800">
-        <g
-          className="TrapezoidContainer"
-          onClick={() => numberClick(1)}
-          style={{ cursor: "pointer", transformOrigin: "center" }}
-        >
-          <polygon
-            className="Trapezoid"
-            points="415,5 667.5,110 607.5,170 412.5,90"
-            fill="transparent"
-          />
-          <text
-            x="400"
-            y="75"
-            className="Number1"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="40"
-            fontWeight={600}
-            fill="#00FF00"
-            style={{
-              cursor: "pointer",
-              transform: "rotate(22.5deg)",
-              transformOrigin: "center",
-            }}
-          >
-            Personal
-          </text>
-        </g>
-      </svg>
-
-      <svg width="800" height="800">
-        <g
-          className="TrapezoidContainer"
-          onClick={() => numberClick(2)}
-          style={{
-            cursor: "pointer",
-            transform: "rotate(45deg)",
-            transformOrigin: "center",
-          }}
-        >
-          <polygon
-            className="Trapezoid"
-            points="415,5 667.5,110 607.5,170 412.5,90"
-            fill="transparent"
-          />
-          <text
-            x="400"
-            y="75"
-            className="Number2"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="40"
-            fontWeight={600}
-            fill="#20DF00"
-            style={{
-              cursor: "pointer",
-              transform: "rotate(22.5deg)",
-              transformOrigin: "center",
-            }}
-          >
-            Fin-Print
-          </text>
-        </g>
-      </svg>
-
-      <svg width="800" height="800">
-        <g
-          className="TrapezoidContainer"
-          onClick={() => numberClick(3)}
-          style={{
-            cursor: "pointer",
-            transform: "rotate(90deg)",
-            transformOrigin: "center",
-          }}
-        >
-          <polygon
-            className="Trapezoid"
-            points="415,5 667.5,110 607.5,170 412.5,90"
-            fill="transparent"
-          />
-          <text
-            x="400"
-            y="75"
-            className="Number3"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="40"
-            fontWeight={600}
-            fill="#40BF00"
-            style={{
-              cursor: "pointer",
-              transform: "rotate(22.5deg)",
-              transformOrigin: "center",
-            }}
-          >
-            Copyright
-          </text>
-        </g>
-      </svg>
-
-      <svg width="800" height="800">
-        <g
-          className="TrapezoidContainer"
-          onClick={() => numberClick(4)}
-          style={{
-            cursor: "pointer",
-            transform: "rotate(135deg)",
-            transformOrigin: "center",
-          }}
-        >
-          <polygon
-            className="Trapezoid"
-            points="415,5 667.5,110 607.5,170 412.5,90"
-            fill="transparent"
-          />
-          <text
-            x="400"
-            y="75"
-            className="Number4"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="40"
-            fontWeight={600}
-            fill="#6F9000"
-            style={{
-              cursor: "pointer",
-              transform: "rotate(22.5deg)",
-              transformOrigin: "center",
-            }}
-          >
-            Forensics
-          </text>
-        </g>
-      </svg>
-
-      <svg width="800" height="800">
-        <g
-          className="TrapezoidContainer"
-          onClick={() => numberClick(5)}
-          style={{
-            cursor: "pointer",
-            transform: "rotate(180deg)",
-            transformOrigin: "center",
-          }}
-        >
-          <polygon
-            className="Trapezoid"
-            points="415,5 667.5,110 607.5,170 412.5,90"
-            fill="transparent"
-          />
-          <text
-            x="400"
-            y="75"
-            className="Number5"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="40"
-            fontWeight={600}
-            fill="#936C00"
-            style={{
-              cursor: "pointer",
-              transform: "rotate(22.5deg)",
-              transformOrigin: "center",
-            }}
-          >
-            Security
-          </text>
-        </g>
-      </svg>
-
-      <svg width="800" height="800">
-        <g
-          className="TrapezoidContainer"
-          onClick={() => numberClick(6)}
-          style={{
-            cursor: "pointer",
-            transform: "rotate(225deg)",
-            transformOrigin: "center",
-          }}
-        >
-          <polygon
-            className="Trapezoid"
-            points="415,5 667.5,110 607.5,170 412.5,90"
-            fill="transparent"
-          />
-          <text
-            x="400"
-            y="75"
-            className="Number6"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="40"
-            fontWeight={600}
-            fill="#B74800"
-            style={{
-              cursor: "pointer",
-              transform: "rotate(22.5deg)",
-              transformOrigin: "center",
-            }}
-          >
-            QC
-          </text>
-        </g>
-      </svg>
-
-      <svg width="800" height="800">
-        <g
-          className="TrapezoidContainer"
-          onClick={() => numberClick(7)}
-          style={{
-            cursor: "pointer",
-            transform: "rotate(270deg)",
-            transformOrigin: "center",
-          }}
-        >
-          <polygon
-            className="Trapezoid"
-            points="415,5 667.5,110 607.5,170 412.5,90"
-            fill="transparent"
-          />
-          <text
-            x="400"
-            y="75"
-            className="Number7"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="40"
-            fontWeight={600}
-            fill="#DB2400"
-            style={{
-              cursor: "pointer",
-              transform: "rotate(22.5deg)",
-              transformOrigin: "center",
-            }}
-          >
-            Archiving
-          </text>
-        </g>
-      </svg>
-
-      <svg width="800" height="800">
-        <g
-          className="TrapezoidContainer"
-          onClick={() => numberClick(8)}
-          style={{
-            cursor: "pointer",
-            transform: "rotate(315deg)",
-            transformOrigin: "center",
-          }}
-        >
-          <polygon
-            className="Trapezoid"
-            points="415,5 667.5,110 607.5,170 412.5,90"
-            fill="transparent"
-          />
-          <text
-            x="400"
-            y="75"
-            className="Number8"
-            dominantBaseline="middle"
-            textAnchor="middle"
-            fontSize="40"
-            fontWeight={600}
-            fill="#FF0000"
-            style={{
-              cursor: "pointer",
-              transform: "rotate(22.5deg)",
-              transformOrigin: "center",
-            }}
-          >
-            Law
-          </text>
-        </g>
-      </svg>
+      {trapezoids.map((trapezoid, index) => (
+        <Trapezoid
+          key={index}
+          rotation={trapezoid.rotation}
+          number={trapezoid.number}
+          text={trapezoid.text}
+          color={trapezoid.color}
+          onClick={() => numberClick(trapezoid.number)}
+        />
+      ))}
     </svg>
   );
 };

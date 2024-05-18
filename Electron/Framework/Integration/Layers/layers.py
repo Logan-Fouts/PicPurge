@@ -101,7 +101,6 @@ class Layers:
 
         self.result_duplicates = self.group_related_images(self.result_duplicates)
 
-        # Grab a random image from each group and add to the current_image_paths to give further layers a chance
         for group in self.result_duplicates:
             if group:
                 rand_img = random.choice(group)
@@ -162,12 +161,11 @@ class Layers:
         self._write(move)
 
     def _write(self, move):
-
         if not self.result_duplicates:
             return
 
         if move:
-            base_dir = "classified_images"  # Parent directory for both duplicates and non-duplicates
+            base_dir = "classified_images"
             if not os.path.exists(base_dir):
                 os.makedirs(base_dir)
 
@@ -185,8 +183,6 @@ class Layers:
                 for img_path in group:
                     if os.path.exists(img_path):
                         shutil.copy(img_path, group_dir)
-                    else:
-                        print(f"Image path does not exist: {img_path}")
 
             # Handle non-duplicates
             non_dups_dir = os.path.join(base_dir, "non_duplicates_directory")
@@ -196,5 +192,3 @@ class Layers:
             for i, img_path in enumerate(self.result_possible_duplicates, 1):
                 if os.path.exists(img_path):
                     shutil.copy(img_path, non_dups_dir)
-                else:
-                    print(f"Image path does not exist: {img_path}")

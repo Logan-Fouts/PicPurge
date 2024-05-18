@@ -59,7 +59,6 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
       <rect
         x="694.156"
         y="671.529"
-
         width="32"
         height="800"
         transform="rotate(135 694.156 671.529)"
@@ -73,33 +72,33 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
         <g
           className="TrapezoidContainer"
           onClick={() => numberClick(1)}
-          style={{cursor: "pointer", transformOrigin: "center"}}
+          style={{ cursor: "pointer", transformOrigin: "center" }}
         >
-        <polygon 
-          className="Trapezoid"
-          points="415,5 667.5,110 607.5,170 412.5,90"
-          fill="transparent"
-        />
-        <text 
+          <polygon
+            className="Trapezoid"
+            points="415,5 667.5,110 607.5,170 412.5,90"
+            fill="transparent"
+          />
+          <text
             x="400"
             y="75"
             className="Number1"
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize="58"
+            fontSize="40"
             fontWeight={600}
             fill="#00FF00"
             style={{
               cursor: "pointer",
               transform: "rotate(22.5deg)",
-              transformOrigin: "center"
+              transformOrigin: "center",
             }}
           >
-            1
+            Personal
           </text>
         </g>
       </svg>
-      
+
       <svg width="800" height="800">
         <g
           className="TrapezoidContainer"
@@ -107,7 +106,7 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
           style={{
             cursor: "pointer",
             transform: "rotate(45deg)",
-            transformOrigin: "center"
+            transformOrigin: "center",
           }}
         >
           <polygon
@@ -115,22 +114,22 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
             points="415,5 667.5,110 607.5,170 412.5,90"
             fill="transparent"
           />
-          <text 
+          <text
             x="400"
             y="75"
             className="Number2"
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize="58"
+            fontSize="40"
             fontWeight={600}
             fill="#20DF00"
             style={{
               cursor: "pointer",
               transform: "rotate(22.5deg)",
-              transformOrigin: "center"
+              transformOrigin: "center",
             }}
           >
-            2
+            Fin-Print
           </text>
         </g>
       </svg>
@@ -142,7 +141,7 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
           style={{
             cursor: "pointer",
             transform: "rotate(90deg)",
-            transformOrigin: "center"
+            transformOrigin: "center",
           }}
         >
           <polygon
@@ -150,26 +149,25 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
             points="415,5 667.5,110 607.5,170 412.5,90"
             fill="transparent"
           />
-          <text 
+          <text
             x="400"
             y="75"
             className="Number3"
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize="58"
+            fontSize="40"
             fontWeight={600}
             fill="#40BF00"
             style={{
               cursor: "pointer",
               transform: "rotate(22.5deg)",
-              transformOrigin: "center"
+              transformOrigin: "center",
             }}
           >
-            3
+            Copyright
           </text>
         </g>
       </svg>
-
 
       <svg width="800" height="800">
         <g
@@ -178,7 +176,7 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
           style={{
             cursor: "pointer",
             transform: "rotate(135deg)",
-            transformOrigin: "center"
+            transformOrigin: "center",
           }}
         >
           <polygon
@@ -186,26 +184,25 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
             points="415,5 667.5,110 607.5,170 412.5,90"
             fill="transparent"
           />
-          <text 
+          <text
             x="400"
             y="75"
             className="Number4"
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize="58"
+            fontSize="40"
             fontWeight={600}
             fill="#6F9000"
             style={{
               cursor: "pointer",
               transform: "rotate(22.5deg)",
-              transformOrigin: "center"
+              transformOrigin: "center",
             }}
           >
-            4
+            Forensics
           </text>
         </g>
       </svg>
-
 
       <svg width="800" height="800">
         <g
@@ -214,7 +211,7 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
           style={{
             cursor: "pointer",
             transform: "rotate(180deg)",
-            transformOrigin: "center"
+            transformOrigin: "center",
           }}
         >
           <polygon
@@ -222,26 +219,25 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
             points="415,5 667.5,110 607.5,170 412.5,90"
             fill="transparent"
           />
-          <text 
+          <text
             x="400"
             y="75"
             className="Number5"
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize="58"
+            fontSize="40"
             fontWeight={600}
             fill="#936C00"
             style={{
               cursor: "pointer",
               transform: "rotate(22.5deg)",
-              transformOrigin: "center"
+              transformOrigin: "center",
             }}
           >
-            5
+            Security
           </text>
         </g>
       </svg>
-
 
       <svg width="800" height="800">
         <g
@@ -250,7 +246,7 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
           style={{
             cursor: "pointer",
             transform: "rotate(225deg)",
-            transformOrigin: "center"
+            transformOrigin: "center",
           }}
         >
           <polygon
@@ -258,22 +254,22 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
             points="415,5 667.5,110 607.5,170 412.5,90"
             fill="transparent"
           />
-          <text 
+          <text
             x="400"
             y="75"
             className="Number6"
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize="58"
+            fontSize="40"
             fontWeight={600}
             fill="#B74800"
             style={{
               cursor: "pointer",
               transform: "rotate(22.5deg)",
-              transformOrigin: "center"
+              transformOrigin: "center",
             }}
           >
-            6
+            QC
           </text>
         </g>
       </svg>
@@ -285,7 +281,7 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
           style={{
             cursor: "pointer",
             transform: "rotate(270deg)",
-            transformOrigin: "center"
+            transformOrigin: "center",
           }}
         >
           <polygon
@@ -293,26 +289,25 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
             points="415,5 667.5,110 607.5,170 412.5,90"
             fill="transparent"
           />
-          <text 
+          <text
             x="400"
             y="75"
             className="Number7"
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize="58"
+            fontSize="40"
             fontWeight={600}
             fill="#DB2400"
             style={{
               cursor: "pointer",
               transform: "rotate(22.5deg)",
-              transformOrigin: "center"
+              transformOrigin: "center",
             }}
           >
-            7
+            Archiving
           </text>
         </g>
       </svg>
-
 
       <svg width="800" height="800">
         <g
@@ -321,7 +316,7 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
           style={{
             cursor: "pointer",
             transform: "rotate(315deg)",
-            transformOrigin: "center"
+            transformOrigin: "center",
           }}
         >
           <polygon
@@ -329,22 +324,22 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
             points="415,5 667.5,110 607.5,170 412.5,90"
             fill="transparent"
           />
-          <text 
+          <text
             x="400"
             y="75"
             className="Number8"
             dominantBaseline="middle"
             textAnchor="middle"
-            fontSize="58"
+            fontSize="40"
             fontWeight={600}
             fill="#FF0000"
             style={{
               cursor: "pointer",
               transform: "rotate(22.5deg)",
-              transformOrigin: "center"
+              transformOrigin: "center",
             }}
           >
-            8
+            Law
           </text>
         </g>
       </svg>
@@ -353,3 +348,4 @@ const DetectionWheel: React.FC<DetectionWheelProps> = ({
 };
 
 export default DetectionWheel;
+

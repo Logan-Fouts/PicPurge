@@ -163,7 +163,6 @@ class Layers:
 
     def _write(self, move):
 
-        print("Moving")
         if not self.result_duplicates:
             return
 

@@ -78,10 +78,11 @@ def main(image_dir, preset):
         case 8:
             print("TODO")
 
+
     if layers:
         layered_architecture = Layers(layers)
         layered_architecture.run(image_paths)
-        layered_architecture.print_final_results()
+        layered_architecture.print_final_results(move=False)
 
 
 if __name__ == "__main__":

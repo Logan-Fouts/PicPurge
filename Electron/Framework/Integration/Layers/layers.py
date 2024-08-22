@@ -4,6 +4,7 @@ import shutil
 import time
 import sys
 
+from pathlib import Path
 from Wrapper.wrapper import Wrapper
 
 
@@ -100,9 +101,9 @@ class Layers:
         lst = [item for tup in self.result_duplicates for item in tup]
         curr_paths = set(image_paths) - set(lst)
 
-        for _ in range(len(curr_paths)):
+        for _ in range(len(duplicates)):
             print("Duplicate_Found_Message")
-            time.sleep(0.0001)
+            time.sleep(0.01)
 
         self.result_duplicates = self.group_related_images(self.result_duplicates)
 
@@ -168,32 +169,38 @@ class Layers:
     def _write(self, move):
         if not self.result_duplicates:
             return
-
-        if move:
-            base_dir = "classified_images"
-            if not os.path.exists(base_dir):
-                os.makedirs(base_dir)
-
-            # Handle duplicates
-            dups_dir = os.path.join(base_dir, "duplicates_directory")
-            if not os.path.exists(dups_dir):
-                os.makedirs(dups_dir)
-
-            related_groups = self.group_related_images(self.result_duplicates)
-            for i, group in enumerate(related_groups, 1):
-                group_dir = os.path.join(dups_dir, f"group_{i}")
-                if not os.path.exists(group_dir):
-                    os.makedirs(group_dir)
-
-                for img_path in group:
-                    if os.path.exists(img_path):
+        # Get the path to the desktop
+        desktop_path = Path.home() / "Desktop"
+        base_dir = desktop_path / "classified_images"
+        base_dir.mkdir(exist_ok=True)
+        # Handle duplicates
+        dups_dir = base_dir / "duplicates_directory"
+        dups_dir.mkdir(exist_ok=True)
+        related_groups = self.group_related_images(self.result_duplicates)
+        for i, group in enumerate(related_groups, 1):
+            group_dir = dups_dir / f"group_{i}"
+            group_dir.mkdir(exist_ok=True)
+            for img_path in group:
+                if Path(img_path).exists():
+                    if move:
+                        shutil.move(img_path, group_dir)
+                    else:
                         shutil.copy(img_path, group_dir)
-
-            # Handle non-duplicates
-            non_dups_dir = os.path.join(base_dir, "non_duplicates_directory")
-            if not os.path.exists(non_dups_dir):
-                os.makedirs(non_dups_dir)
-
-            for i, img_path in enumerate(self.result_possible_duplicates, 1):
-                if os.path.exists(img_path):
+        # Handle non-duplicates
+        non_dups_dir = base_dir / "non_duplicates_directory"
+        non_dups_dir.mkdir(exist_ok=True)
+        for img_path in self.result_possible_duplicates:
+            if Path(img_path).exists():
+                if move:
+                    shutil.move(img_path, non_dups_dir)
+                else:
                     shutil.copy(img_path, non_dups_dir)
+        # Write results to a text file on the desktop
+        results_file = desktop_path / "duplicate_image_results.txt"
+        with results_file.open('w') as f:
+            f.write("Duplicate Images:\n")
+            for group in self.result_duplicates:
+                f.write(f"Group: {', '.join(group)}\n")
+            f.write("\nPossible Duplicates:\n")
+            for img in self.result_possible_duplicates:
+                f.write(f"{img}\n")

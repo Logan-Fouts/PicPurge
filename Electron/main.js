@@ -76,7 +76,7 @@ ipcMain.handle(
           progressUpdates.push(progressPercentage);
           mainWindow.webContents.send("progressUpdate", progressPercentage);
         } else {
-          // console.log(output);
+          console.log(output);
         }
         if (output.includes("Duplicate_Found_Message")) {
           mainWindow.webContents.send("duplicateFound");
